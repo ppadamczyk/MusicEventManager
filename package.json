@@ -1,0 +1,19 @@
+{
+  "name": "music-event-manager",
+  "version": "1.0.0",
+  "description": "app for events organization",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ppadamczyk/MusicEventManager.git"
+  },
+  "author": "Przemyslaw Adamczyk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ppadamczyk/MusicEventManager/issues"
+  },
+  "homepage": "https://github.com/ppadamczyk/MusicEventManager#readme"
+}
