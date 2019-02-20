@@ -2,6 +2,7 @@ var express = require("express"),
     app = express(),
     bodyParser  = require("body-parser"),
     mongoose    = require("mongoose"),
+    User        = require("./models/user"),
     passport    = require("passport"),
     LocalStrategy = require("passport-local"),
     flash        = require("connect-flash"),
@@ -9,11 +10,32 @@ var express = require("express"),
     methodOverride = require("method-override");
 
 
+
+app.use(require("express-session")({
+    secret: "I love my university",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+   //res.locals.error = req.flash("error");
+   //res.locals.success = req.flash("success");
+   next();
+});
+
+
+
 //req routes
 var indexRoutes = require("./routes/index");
 
 
-//mongoose.connect("mongodb://localhost/music_event_manager");
+mongoose.connect("mongodb://localhost/music_event_manager", { useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
