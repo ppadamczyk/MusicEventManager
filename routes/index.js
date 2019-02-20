@@ -40,4 +40,13 @@ router.post("/login", passport.authenticate("local",
     }), function(req, res){
 });
 
+router.get("/logout", function(req, res){
+   req.logout();
+   res.redirect("/main");
+});
+
+router.get("/about", function(req, res) {
+    res.render("about");
+});
+
 module.exports = router;

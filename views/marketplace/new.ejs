@@ -1,0 +1,21 @@
+<% include ../partials/header %> 
+
+
+<div class="container">
+    <div class="row">
+        <div style="width: 30%; margin: 25px auto;">
+            <h1 style="text-align: center;">Add new offer</h1>
+            <form action="/marketplace" method="post">
+                <div class="form-group">
+                    <input type="text" class="login-form" name="offername" placeholder="offer name">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="login-form" name="description" placeholder="description">
+                </div>
+                <button class="btn btn-lg btn-primary btn-block">Add offer</button>
+            </form>
+            <a href="/marketplace">Go back</a>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %> 
