@@ -1,14 +1,14 @@
 <% include ../partials/header %> 
-
-<h1>This will be a marketplace soon</h1>
     <div class="container">
-      <div class="row text-center">
-            <% offers.forEach(function(offer){ %>
-                <div class="col-md-3 col-sm-6">
-                    <div class="thumbnail">
-                       <img src="<%= offer.picture %>">
-                       <div class="caption">
-                           <h4><%= offer.offer_name %></h4>
+      <div class="row">
+          <% offers.forEach(function(offer){ %>
+                <div class="col-md-3 col-sm-6 p-1">
+                    <div class="card m-5" style="width: 18rem; height: auto">
+                       <img class="card-img-top" src="<%= offer.picture %>">
+                       <div class="card-body">
+                           <div class="card-title">
+                           <%= offer.offer_name %>
+                           </div>
                        </div>
                        <p>
                            <a href="/marketplace/<%= offer._id %>" class="btn btn-primary">More Info</a>
