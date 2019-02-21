@@ -8,7 +8,7 @@ router.get("/", function(req, res){
     res.render("index");
 });
 
-router.get("/main", function(req, res){
+router.get("/main", middleware.isLoggedIn, function(req, res){
     res.render("main");
 });
 

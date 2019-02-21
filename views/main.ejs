@@ -2,16 +2,21 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-6">
+        
+        <!--DISPLAY DEPEND ON USER ROLES-->
+        <!--1) Organizer & some other role-->
+        
+        <% if(currentUser.roles.organizer === true && (currentUser.roles.artist === true || currentUser.roles.tech === true || currentUser.roles.place_owner === true || currentUser.roles.gear_owner === true)){ %>
+        <div class="col-4">
             <div class="jumbotron">
                 <h1 class="display-4">Search for offers</h1>
-                <p class="lead">Find talented people which will be able to help you with your special event.</p>
+                <p class="lead">Check what other people are able to offer.</p>
                 <hr class="my-4">
-                <p>Click the button below to access countless of offers.</p>
+                <p>Click the button below to browse all offers</p>
                 <a class="btn btn-primary btn-lg" href="/marketplace" role="button">View all offers</a>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-4">
             <div class="jumbotron">
                 <h1 class="display-4">Create your own offer</h1>
                 <p class="lead">Offer your own abilities or skills helping other people and earnig money.</p>
@@ -20,10 +25,62 @@
                 <a class="btn btn-primary btn-lg" href="/marketplace/new" role="button">Create your offer</a>
             </div>
         </div>
+        <div class="col-4">
+            <div class="jumbotron">
+                <h1 class="display-4">Organize your own event!</h1>
+                <p class="lead">Pick the best offers from the community marketplace to organize your own unique event.</p>
+                <hr class="my-4">
+                <p>Click the button below to access countless of offers.</p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Create your event</a>
+            </div>
+        </div>
+        <% } %>
+        
+        <!-- 2) Only organizer -->
+        
+        <% if(currentUser.roles.organizer === true && currentUser.roles.artist != true && currentUser.roles.tech != true && currentUser.roles.place_owner != true && currentUser.roles.gear_owner != true){ %>
+        <div class="col-6">
+            <div class="jumbotron">
+                <h1 class="display-4">Browse all offers</h1>
+                <p class="lead">Check what other people are able to offer.</p>
+                <hr class="my-4">
+                <p>Click the button below to browse all offers</p>
+                <a class="btn btn-primary btn-lg" href="/marketplace" role="button">View all offers</a>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="jumbotron">
+                <h1 class="display-4">Organize your own event!</h1>
+                <p class="lead">Pick the best offers from the community marketplace to organize your own unique event.</p>
+                <hr class="my-4">
+                <p>Click the button below to access countless of offers.</p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Create your event</a>
+            </div>
+        </div>
+        <% } %>
+        
+        <!-- 3) Any role but not organizer -->
+        
+        <% if(currentUser.roles.organizer != true) { %>
+        <div class="col-6">
+            <div class="jumbotron">
+                <h1 class="display-4">Search for offers</h1>
+                <p class="lead">Check what other people are able to offer.</p>
+                <hr class="my-4">
+                <p>Click the button below to browse all offers</p>
+                <a class="btn btn-primary btn-lg" href="/marketplace" role="button">View all offers</a>
+            </div>
+       </div>
+       <div class="col-6">
+            <div class="jumbotron">
+                <h1 class="display-4">Create your own offer</h1>
+                <p class="lead">Offer your own abilities or skills helping other people and earnig money.</p>
+                <hr class="my-4">
+                <p>Click the button below to create your own offer and be found by others.</p>
+                <a class="btn btn-primary btn-lg" href="/marketplace/new" role="button">Create your offer</a>
+            </div>
+        </div>
+        <% } %>
     </div>
 </div>
-
-
-
-
 <% include ./partials/footer %> 
