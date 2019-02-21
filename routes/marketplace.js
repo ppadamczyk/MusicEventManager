@@ -3,7 +3,8 @@ var router  = express.Router();
 var mongoose = require("mongoose");
 var User = require("../models/user");
 var Offer= require("../models/offer");
-var middleware = require("../middleware/index")
+var middleware = require("../middleware/index");
+
 
 router.get("/marketplace", function(req, res){
     Offer.find({}, function(err, foundOffers){

@@ -21,6 +21,7 @@
 			      <a class="nav-item nav-link" href="/register">Sign up</a>
 		     <% } else { %>
 			      <a class="nav-item nav-link" href="#">Signed In As <%= currentUser.username %></a>
+			      <a class="nav-item nav-link" href="#">Your roles <%= currentUser.roles %></a>
 			      <a class="nav-item nav-link" href="/logout">Logout</a>
 		      <% } %>
 		    </div>

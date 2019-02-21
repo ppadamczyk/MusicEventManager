@@ -2,6 +2,7 @@ var express = require("express");
 var router  = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
+var middleware = require("../middleware/index");
 
 router.get("/", function(req, res){
     res.render("index");
@@ -15,12 +16,21 @@ router.get("/register", function(req, res) {
     res.render("register");
 });
 
-router.post("/register", function(req, res){
-    var newUser = new User({username: req.body.username});
+router.post("/register", middleware.fixRoles, function(req, res){
+    var newRoles = {
+        organizer: req.body.organizer,
+        artist : req.body.artist, 
+        tech : req.body.tech, 
+        place_owner : req.body.place_owner, 
+        gear_owner : req.body.gear_owner
+    };
+    var newUser = new User({username: req.body.username, roles: newRoles});
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             //req.flash("error", err.message);
+            console.log(err);
             return res.render("register");
+            
         }
         passport.authenticate("local")(req, res, function(){
            //req.flash("success", "Welcome to YelpCamp " + user.username);
