@@ -24,7 +24,6 @@ router.post("/events", middleware.isLoggedIn, function(req, res){
             console.log(err);
         } else {
             //redirect back to marketplace page
-            console.log(newlyCreated);
             res.redirect("/events/marketplace");
         }
     });
@@ -38,9 +37,7 @@ router.get("/events/marketplace", middleware.isLoggedIn, function(req, res) {
 router.post('/events/get', function(req, res) {
     
     let id = req.body.id;
-    console.log(id);
     Offer.find({type:id}, function(err, foundOffers){
-        console.log(foundOffers);
         if(err){}
         var msg = {
             foundOffers : foundOffers

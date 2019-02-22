@@ -14,5 +14,12 @@ router.get("/users", middleware.isLoggedIn, function(req, res) {
 );
 });
 
-
+router.get("/users/:id", middleware.isLoggedIn, function(req,res){
+   User.findById(req.params.id, function(err, foundUser){
+       if(err){
+           
+       }
+       res.render("users/show", {user:foundUser});
+   }) ;
+});
 module.exports = router;
