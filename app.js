@@ -35,6 +35,7 @@ app.use(function(req, res, next){
 var indexRoutes = require("./routes/index");
 var marketplaceRoutes = require("./routes/marketplace");
 var eventRoutes = require("./routes/events");
+var userRoutes = require("./routes/users");
 
 
 mongoose.connect("mongodb://localhost/music_event_manager", { useNewUrlParser: true });
@@ -46,6 +47,7 @@ app.use(methodOverride('_method'));
 app.use("/", indexRoutes);
 app.use("/", marketplaceRoutes);
 app.use("/", eventRoutes);
+app.use("/", userRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Server is up!");

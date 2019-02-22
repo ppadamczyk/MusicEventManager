@@ -2,25 +2,45 @@
     <div class="container">
         <div class="row">
             <div class="col-3">
-            <div class="jumbotron">
+            <div class="jumbotron" id="artist_place">
                 <button class="btn btn-primary btn-lg" role="button" id="artist">Find an artist</button>
             </div>
         </div>
         <div class="col-3">
-            <div class="jumbotron">
-                <button class="btn btn-primary btn-lg" role="button" id="place">Find a place</button>
+            <div class="jumbotron" id="place_owner_place">
+                <button class="btn btn-primary btn-lg" role="button" id="place_owner">Find a place</button>
             </div>
         </div>
         <div class="col-3">
-            <div class="jumbotron">
+            <div class="jumbotron" id="tech_place">
                 <button class="btn btn-primary btn-lg" role="button" id="tech">Find a tech</button>
             </div>
         </div>
         <div class="col-3">
-            <div class="jumbotron">
-                <button class="btn btn-primary btn-lg" role="button" id="gear">Find gear to rent</button>
+            <div class="jumbotron" id="gear_owner_place">
+                <button class="btn btn-primary btn-lg" role="button" id="gear_owner">Find gear to rent</button>
             </div>
         </div>
         </div>
     </div>
+<script>
+    $("button").click(function(){
+    console.log("asdasd");
+    let id = $(this).attr("id");
+   $.ajax({
+        method: "POST",
+        url: "/events/get",
+        data: {
+            id:id
+        }
+    })
+    .done(function(msg) {
+        console.log(msg);
+        msg.foundOffers.forEach(function (offer){
+            console.log(offer);
+            $("#" + id + "_place").append("<li>" + offer.offer_name + "</li>");
+        });
+    }); 
+});
+</script>
 <% include ../partials/footer %> 

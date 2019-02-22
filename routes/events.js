@@ -2,6 +2,7 @@ var express = require("express");
 var router  = express.Router();
 var passport = require("passport");
 var Event = require("../models/event");
+var Offer = require("../models/offer");
 var middleware = require("../middleware/index");
 
 router.get("/events/new", middleware.isLoggedIn, function(req, res) {
@@ -34,5 +35,18 @@ router.get("/events/marketplace", middleware.isLoggedIn, function(req, res) {
 });
 
 
+router.post('/events/get', function(req, res) {
+    
+    let id = req.body.id;
+    console.log(id);
+    Offer.find({type:id}, function(err, foundOffers){
+        console.log(foundOffers);
+        if(err){}
+        var msg = {
+            foundOffers : foundOffers
+        };
+        res.send(msg);
+    });
+});
 
 module.exports = router;
