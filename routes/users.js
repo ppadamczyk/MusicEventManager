@@ -5,14 +5,14 @@ var User = require("../models/user");
 var middleware = require("../middleware/index");
 
 router.get("/users", middleware.isLoggedIn, function(req, res) {
-    User.find({}),function(err, foundUser){
+    User.find({}, function(err, foundUsers){
         if(err){
             console.log(err);
         }
-        res.render("users/index", {users:foundUser});
-    };
+        res.render("users/index", {users:foundUsers});
+    }
+);
 });
-
 
 
 module.exports = router;
