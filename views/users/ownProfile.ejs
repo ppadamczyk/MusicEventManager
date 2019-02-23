@@ -1,0 +1,14 @@
+<% include ../partials/header %>
+<div class="container">
+    <h1>YOUR PROFILE</h1>
+    <h4><a><%=user.username%></a></h4>
+    <% user.reviews.forEach(function(review){ %>
+        <h1> <%= review.title %></h1>
+       <% }); %>
+       <a href="/users/<%= user._id %>/#" class="btn btn-primary">Update my roles</a>
+       <a href="/users/<%= user._id %>/#" class="btn btn-primary">Show my reviews</a>
+       <a href="/users/<%= user._id %>/#" class="btn btn-primary">Show my events</a>
+    <a href="/users"> Go back!</a>
+</div>
+
+<% include ../partials/footer %>

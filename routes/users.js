@@ -15,7 +15,7 @@ router.get("/users", middleware.isLoggedIn, function(req, res) {
 );
 });
 
-router.get("/users/:id", middleware.isLoggedIn, function(req,res){
+router.get("/users/:id", middleware.isLoggedIn, middleware.ownProfile, function(req,res){
    User.findById(req.params.id).populate("reviews").exec(function(err, foundUser){
        if(err){
        }
@@ -56,4 +56,5 @@ router.post("/users/:id/reviews", middleware.isLoggedIn, function(req,res){
         });
    }) ;
 });
+
 module.exports = router;
