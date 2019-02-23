@@ -15,8 +15,15 @@ middlewareObj.ownProfile = function(req,res,next){
         res.render("users/ownProfile", {user:foundUser});
    }) ;
     }  else next();
-    
 };
+
+middlewareObj.isOwnProfile = function(req,res,next){
+    if(req.user._id.equals(req.params.id)){
+        next();
+    }  else {
+        res.render("main");
+    }
+    };
 
 middlewareObj.fixRoles = function(req, res, next){
     if(req.body.organizer === "organizer"){ 

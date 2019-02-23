@@ -57,4 +57,8 @@ router.post("/users/:id/reviews", middleware.isLoggedIn, function(req,res){
    }) ;
 });
 
+router.get("/users/:id/roles", middleware.isLoggedIn, middleware.isOwnProfile, function(req, res) {
+    res.render("users/roles", {user:req.params.user});
+});
+
 module.exports = router;

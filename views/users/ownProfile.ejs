@@ -5,7 +5,7 @@
     <% user.reviews.forEach(function(review){ %>
         <h1> <%= review.title %></h1>
        <% }); %>
-       <a href="/users/<%= user._id %>/#" class="btn btn-primary">Update my roles</a>
+       <a href="/users/<%= user._id %>/roles" class="btn btn-primary">Update my roles</a>
        <a href="/users/<%= user._id %>/#" class="btn btn-primary">Show my reviews</a>
        <a href="/users/<%= user._id %>/#" class="btn btn-primary">Show my events</a>
     <a href="/users"> Go back!</a>
