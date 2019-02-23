@@ -10,7 +10,13 @@ var UserSchema = new mongoose.Schema({
         tech: Boolean,
         place_owner: Boolean,
         gear_owner: Boolean
-    }
+    },
+    reviews:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Review"
+        },
+    ]
 });
 
 UserSchema.plugin(passportLocalMongoose)

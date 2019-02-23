@@ -1,0 +1,35 @@
+<% include ../partials/header %> 
+
+
+<div class="container">
+    <div class="row">
+        <div style="width: 30%; margin: 25px auto;">
+            <h1 style="text-align: center;">Write <%= user.username %>'s review</h1>
+            <form action="/users/<%= user._id %>/reviews" method="post">
+                <div class="form-group">
+                    <input type="text" class="login-form" name="title" placeholder="title">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="login-form" name="text" placeholder="review">
+                </div>
+                <div class="form-group">
+                    <select name="grade">
+                        <option value="10">10</option>
+                        <option value="9">9</option>
+                        <option value="8">8</option>
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>   
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block">Add it</button>
+            </form>
+            <a href="/main">Go back</a>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %> 

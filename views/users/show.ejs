@@ -1,6 +1,10 @@
 <% include ../partials/header %>
 <div class="container">
     <h4><a><%=user.username%></a></h4>
+    <% user.reviews.forEach(function(review){ %>
+        <h1> <%= review.title %></h1>
+       <% }); %>
+       <a href="/users/<%= user._id %>/reviews/new" class="btn btn-primary">Add review</a>
     <a href="/users"> Go back!</a>
 </div>
 
