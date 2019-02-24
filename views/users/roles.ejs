@@ -1,3 +1,19 @@
 <% include ../partials/header %>
-<h1>Roles will be here soon</h1>
+    <h1><%= user.username %> roles:</h1>
+    <% if(user.roles.organizer) { %>
+        <li>Organizer</li>
+    <% } %>
+    <% if(user.roles.tech) { %>
+        <li>Tech</li>
+    <% } %>
+    <% if(user.roles.artist) { %>
+        <li>Artist</li>
+    <% } %>
+    <% if(user.roles.place_owner) { %>
+        <li>Place owner</li>
+    <% } %>
+    <% if(user.roles.gear_owner) { %>
+        <li>Gear owner</li>
+    <% } %>
+
 <% include ../partials/footer %>

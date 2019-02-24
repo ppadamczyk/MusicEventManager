@@ -4,29 +4,36 @@ var passport = require("passport");
 var Event = require("../models/event");
 var Offer = require("../models/offer");
 var middleware = require("../middleware/index");
+var User = require("../models/user");
 
 router.get("/events/new", middleware.isLoggedIn, function(req, res) {
     res.render("events/new");
 });
 
 router.post("/events", middleware.isLoggedIn, function(req, res){
-    var event_name = req.body.event_name;
-    var picture = req.body.picture;
-    var description = req.body.description;
-    var author = {
-        id: req.user._id,
-        username: req.user.username
-    };
-    var newEvent = {event_name: event_name, picture:picture, description: description, author:author};
-    // Create a new event and save to DB
-    Event.create(newEvent, function(err, newlyCreated){
-        if(err){
-            console.log(err);
-        } else {
-            //redirect back to marketplace page
-            res.redirect("/events/marketplace");
-        }
-    });
+    User.findById(req.user._id, function(err, foundUser){
+        var event_name = req.body.event_name;
+        var picture = req.body.picture;
+        var description = req.body.description;
+        var author = {
+            id: req.user._id,
+            username: req.user.username
+        };
+        var newEvent = {event_name: event_name, picture:picture, description: description, author:author};
+        // Create a new event and save to DB
+        Event.create(newEvent, function(err, newlyCreated){
+            newlyCreated.save();
+            foundUser.events.push(newlyCreated);
+            foundUser.save();
+            if(err){
+                console.log(err);
+            } else {
+                //redirect back to marketplace page
+                console.log(foundUser.events);
+                res.redirect("/main");
+            }
+        });
+});
 });
 
 router.get("/events/marketplace", middleware.isLoggedIn, function(req, res) {

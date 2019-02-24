@@ -1,0 +1,7 @@
+<% include ../partials/header %>
+    <h1><%= user.username %> reviews:</h1>
+    <% user.reviews.forEach(function(review){ %>
+        <h1> <%= review.title %></h1>
+    <% }); %>
+
+<% include ../partials/footer %>

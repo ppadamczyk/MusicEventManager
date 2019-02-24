@@ -58,7 +58,19 @@ router.post("/users/:id/reviews", middleware.isLoggedIn, function(req,res){
 });
 
 router.get("/users/:id/roles", middleware.isLoggedIn, middleware.isOwnProfile, function(req, res) {
-    res.render("users/roles", {user:req.params.user});
+    User.findById(req.params.id, function(err, foundUser){
+    res.render("users/roles", {user:foundUser});
+    });
 });
 
+router.get("/users/:id/reviews", middleware.isLoggedIn, middleware.isOwnProfile, function(req, res) {
+    User.findById(req.params.id).populate("reviews").exec(function(err, foundUser){
+    res.render("users/reviews", {user:foundUser});
+    });
+});
+router.get("/users/:id/events", middleware.isLoggedIn, middleware.isOwnProfile, function(req, res) {
+    User.findById(req.params.id).populate("events").exec(function(err, foundUser){
+    res.render("users/events", {user:foundUser});
+    });
+});
 module.exports = router;

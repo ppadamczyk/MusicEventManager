@@ -1,0 +1,7 @@
+<% include ../partials/header %>
+    <h1><%= user.username %> events:</h1>
+    <% user.events.forEach(function(event){ %>
+        <h1> <%= event.event_name %></h1>
+    <% }); %>
+
+<% include ../partials/footer %>
