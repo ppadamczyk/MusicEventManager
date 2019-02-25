@@ -55,4 +55,13 @@ router.get("/marketplace/:id", function(req, res) {
         res.render("marketplace/show", {offer:foundOffer});
     });
 });
+
+router.get("/marketplace/:id/details", function(req, res) {
+    Offer.findById(req.params.id,function(err, foundOffer){
+        if(err){
+            console.log(err);
+        }
+        res.render("marketplace/details", {offer:foundOffer});
+    });
+});
 module.exports = router;

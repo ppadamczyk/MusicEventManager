@@ -1,3 +1,11 @@
 .login-form{
     width: 100%;
 }
+
+#artist_place div{
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+    padding: 0;
+    text-align: center;
+}

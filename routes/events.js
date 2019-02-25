@@ -30,14 +30,16 @@ router.post("/events", middleware.isLoggedIn, function(req, res){
             } else {
                 //redirect back to marketplace page
                 console.log(foundUser.events);
-                res.redirect("/events/marketplace");
+                res.redirect("/events/" + newlyCreated._id +"/marketplace");
             }
         });
 });
 });
 
-router.get("/events/marketplace", middleware.isLoggedIn, function(req, res) {
-    res.render("events/marketplace");
+router.get("/events/:id/marketplace", middleware.isLoggedIn, function(req, res) {
+    Event.findById(req.params.id, function(err, foundEvent) {
+        res.render("events/marketplace", {event:foundEvent});
+    });
 });
 
 

@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= offer.picture %>">
+                <div class="caption-full">
+                    <h4 class="pull-right"><%= offer.price %></h4>
+                    <h4><a><%=offer.offer_name%></a></h4>
+                    <p><%= offer.description %></p>
+                    <p>
+                        <em>Submitted By <%= offer.author.username %></em>
+                    </p>
+                        <a href="#"> Pick this offer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>
