@@ -20,6 +20,7 @@ router.get("/marketplace/new", middleware.isLoggedIn, function(req, res){
 });
 
 router.post("/marketplace", middleware.isLoggedIn, function(req, res){
+    User.findById(req.user._id, function(err, foundUser){
     var offer_name = req.body.offer_name;
     var type = req.body.type;
     var picture = req.body.picture;
@@ -32,6 +33,9 @@ router.post("/marketplace", middleware.isLoggedIn, function(req, res){
     var newOffer = {offer_name: offer_name, type:type, picture:picture, description: description, price:price, author:author};
     // Create a new offer and save to DB
     Offer.create(newOffer, function(err, newlyCreated){
+        newlyCreated.save();
+        foundUser.offers.push(newlyCreated);
+        foundUser.save();
         if(err){
             console.log(err);
         } else {
@@ -40,6 +44,7 @@ router.post("/marketplace", middleware.isLoggedIn, function(req, res){
             res.redirect("/marketplace");
         }
     });
+});
 });
 
 router.get("/marketplace/:id", function(req, res) {

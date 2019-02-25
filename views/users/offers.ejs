@@ -1,0 +1,7 @@
+<% include ../partials/header %>
+    <h1><%= user.username %> offers:</h1>
+    <% user.offers.forEach(function(offer){ %>
+        <a href="/marketplace/<%=offer._id%>"><h1> <%= offer.offer_name %></h1></a>
+    <% }); %>
+
+<% include ../partials/footer %>

@@ -22,6 +22,12 @@ var UserSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Event"
         },
+    ],
+    offers:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Offer"
+        },
     ]
 });
 
