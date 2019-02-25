@@ -61,7 +61,7 @@ router.get("/marketplace/:id/details", function(req, res) {
         if(err){
             console.log(err);
         }
-        res.render("marketplace/details", {offer:foundOffer});
+        res.render("marketplace/details", {offer:foundOffer, event:req.user.events.slice(-1)[0]});
     });
 });
 module.exports = router;

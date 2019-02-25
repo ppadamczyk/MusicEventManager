@@ -44,7 +44,6 @@ router.get("/events/:id/marketplace", middleware.isLoggedIn, function(req, res) 
 
 
 router.post('/events/get', function(req, res) {
-    
     let id = req.body.id;
     Offer.find({type:id}, function(err, foundOffers){
         if(err){}
@@ -55,9 +54,36 @@ router.post('/events/get', function(req, res) {
     });
 });
 
+router.post("/events/pick", function(req, res) {
+    let offer = req.body.offer;
+    let event_id = req.body.event_id;
+    console.log(offer.type);
+    Event.findById(event_id, function(err, foundEvent){
+        if(err){}
+        if(offer.type=="artist"){
+        foundEvent.contractors.artists.push(offer.author);
+        foundEvent.save();
+        }
+        if(offer.type=="tech"){
+        foundEvent.contractors.techs.push(offer.author);
+        foundEvent.save();
+        }
+        if(offer.type=="gear_owner"){
+        foundEvent.contractors.gear_owners.push(offer.author);
+        foundEvent.save();
+        }
+        if(offer.type=="place_owner"){
+        foundEvent.contractors.place_owners=offer.author;
+        foundEvent.save();
+        }
+            
+        });
+});
+
 router.get("/events/:id", middleware.isLoggedIn, function(req, res) {
-    Event.findById(req.params.id, function(err, foundEvent){
+    Event.findById(req.params.id).populate("contractors").exec(function(err, foundEvent){
     res.render("events/show", {event:foundEvent});
+    console.log(foundEvent);
     });
 });
 
