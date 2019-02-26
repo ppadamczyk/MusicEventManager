@@ -22,6 +22,14 @@
             </div>
         </div>
         </div>
+        <div class="row">
+            <h1>You have chosen <%=event.contractors.artists.length%> artists</h1>
+            <h1>You have chosen <%=event.contractors.techs.length%> technicians</h1>
+            <h1>You have chosen <%=event.contractors.gear_owners.length%> places to rent gear</h1>
+            <h1>You have chosen <%if(event.contractors.place_owner){ %>
+                <%= event.contractors.place_owner.username%>
+                <% } %> to be your place owner</h1>
+        </div>
     </div>
 <script>
     $("button").click(function(){

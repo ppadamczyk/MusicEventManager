@@ -38,7 +38,7 @@ router.post("/events", middleware.isLoggedIn, function(req, res){
 });
 
 router.get("/events/:id/marketplace", middleware.isLoggedIn, function(req, res) {
-    Event.findById(req.params.id, function(err, foundEvent) {
+    Event.findById(req.params.id).populate("contractors").exec(function(err, foundEvent) {
         res.render("events/marketplace", {event:foundEvent});
     });
 });
