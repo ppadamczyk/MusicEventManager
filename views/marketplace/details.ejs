@@ -10,28 +10,13 @@
                     <p>
                         <em>Submitted By <%= offer.author.username %></em>
                     </p>
-                        <a class="btn btn-primary" id="picked" href="/events/<%=event._id%>/marketplace"> Pick this offer</a>
+                        <a class="btn btn-primary" href="/events/<%=event._id%>/<%=offer._id%>"> Pick this offer</a>
                         <a class="btn btn-primary" href="/events/<%=event._id%>/marketplace"> Take me back</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
-    $("#picked").on("click",function(){
-        $.ajax({
-            console.log("ajax send");
-            method: "POST",
-            url: "/events/pick",
-            data: {
-                event_id:event._id,
-                offer:offer
-            }
-    }).done(function(msg) {
-        console.log("ajax done");
-        
-    });
-    }
-</script>
+
 
 <% include ../partials/footer %>

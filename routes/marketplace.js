@@ -56,7 +56,7 @@ router.get("/marketplace/:id", function(req, res) {
     });
 });
 
-router.get("/marketplace/:id/details", function(req, res) {
+router.get("/marketplace/:id/details", middleware.isLoggedIn, function(req, res) {
     Offer.findById(req.params.id,function(err, foundOffer){
         if(err){
             console.log(err);
