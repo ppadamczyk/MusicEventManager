@@ -1,5 +1,12 @@
 <% include ../partials/header %> 
-    <div class="container">
+    <div class="container" style="text-align:center">
+        <div class="row">
+            <div class="jumbotron">
+                <h1>Browse all types of offers which you are interested in, then press the button to manage your newly created event!</h1>
+                <hr>
+                <a class="btn btn-primary btn-lg" href="#">Manage your event</a>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
             <div class="jumbotron" id="artist_place">
@@ -21,14 +28,7 @@
                 <button class="btn btn-primary btn-lg" role="button" id="gear_owner">Find gear to rent</button>
             </div>
         </div>
-        </div>
-        <div class="row">
-            <h1>You have chosen <%=event.contractors.artists.length%> artists</h1>
-            <h1>You have chosen <%=event.contractors.techs.length%> technicians</h1>
-            <h1>You have chosen <%=event.contractors.gear_owners.length%> places to rent gear</h1>
-            <h1>You have chosen <%if(event.contractors.place_owner){ %>
-                <%= event.contractors.place_owner.username%>
-                <% } %> to be your place owner</h1>
+        
         </div>
     </div>
 <script>
@@ -46,8 +46,11 @@
         console.log(msg);
         msg.foundOffers.forEach(function (offer){
             console.log(offer);
-            $("#" + id + "_place").append("<div>"+"<div>" + offer.offer_name + "</div>"+ "<a>Show details</a>"+"</div>");
+            $("#" + id).attr("disabled", "disabled");
+            $("#" + id + "_place").append("<div>"+"<img/>"+"<div>" + offer.offer_name + "</div>"+ "<a>Show details</a>"+"</div>");
             $("#" + id + "_place div").addClass("card ");
+            $("#" + id + "_place div img").addClass("card-img-top");
+            $("#" + id + "_place div img").last().attr('src', offer.picture);
             $("#" + id + "_place div a").addClass("btn btn-primary");
             $("#" + id + "_place div a").last().attr('href', '/marketplace/'+offer._id+'/details');
 

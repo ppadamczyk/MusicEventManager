@@ -1,7 +1,22 @@
 <% include ../partials/header %>
+    <div class="container" style="text-align:center">
     <h1><%= user.username %> events:</h1>
-    <% user.events.forEach(function(event){ %>
-        <a href="/events/<%=event._id%>"><h1> <%= event.event_name %></h1></a>
-    <% }); %>
-
+      <div class="row">
+          <% user.events.forEach(function(event){ %>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card mt-2" style="width: 100%; height: auto; text-align:center ">
+                       <img class="card-img-top" src="<%= event.picture %>">
+                       <div class="card-body">
+                           <div class="card-title">
+                           <h4> <%= event.event_name %></h4>
+                           </div>
+                       </div>
+                       <p>
+                          <a href="/events/<%=event._id%>" class="btn btn-primary">Show details</a>
+                       </p>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
 <% include ../partials/footer %>

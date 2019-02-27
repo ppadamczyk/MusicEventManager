@@ -1,12 +1,17 @@
 <% include ../partials/header %>
-    <h1><%= event.event_name %></h1>
-    <p><%= event.description%></p>
-    <p><%= event.author.username %></p>
     <div class="container">
+        <div class="row">
+            <div style="text-align:center" class="col-12">
+                <h1 ><%= event.event_name %></h1>
+                <img class="img-responsive" style="width:100%" src="<%= event.picture%>"/>
+                <p><%= event.description%></p>
+                <p><%= event.author.username %></p>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
             <div class="jumbotron">
-                <h1>Artists:</h1>
+                <h4>Artists:</h4>
                 <% event.contractors.artists.forEach(function(artist){ %>
                     <li><%= artist.username %></li>
                 <% }); %>
@@ -14,7 +19,7 @@
         </div>
         <div class="col-3">
             <div class="jumbotron">
-                <h1>Technicians:</h1>
+                <h4>Technicians:</h4>
                 <% event.contractors.techs.forEach(function(tech){ %>
                     <li><%= tech.username %></li>
                 <% }); %>
@@ -22,7 +27,7 @@
         </div>
         <div class="col-3">
             <div class="jumbotron">
-                <h1>Gear organizers:</h1>
+                <h4>Gear organizers:</h4>
                 <% event.contractors.gear_owners.forEach(function(gear_owner){ %>
                     <li><%= gear_owner.username %></li>
                 <% }); %>
@@ -30,7 +35,7 @@
         </div>
         <div class="col-3">
             <div class="jumbotron" >
-                <h1>Place owner:</h1>
+                <h4>Place owner:</h4>
                 <% if(event.contractors.place_owner!=undefined){ %>
                 <li><%=event.contractors.place_owner.username%></li>
                 <% } %>
