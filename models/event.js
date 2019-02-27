@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var EventSchema = new mongoose.Schema({
     event_name : String,
@@ -38,4 +39,6 @@ var EventSchema = new mongoose.Schema({
     
 });
 
+
+EventSchema.plugin(deepPopulate);
 module.exports = mongoose.model("Event", EventSchema);

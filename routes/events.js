@@ -87,13 +87,15 @@ router.get("/events/:event_id/:offer_id", middleware.isLoggedIn, function(req, r
     
 });
 
-router.get("/events/:event_id", middleware.isLoggedIn, function(req, res) {
-    Event.findById(req.params.event_id).populate("contractors").exec(function(err, foundEvent){
+router.get("/events/:eventid", middleware.isLoggedIn, function(req, res) {
+    console.log(req.params.eventid);
+    Event.findById(req.params.eventid).deepPopulate('contractors.artists contractors.techs contractors.gear_owners contractors.place_owner').exec(function(err, foundEvent) {
         if(err){
             console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +err);
         }
-        res.render("events/show", {event:foundEvent});
         console.log(foundEvent);
+        res.render("events/show", {event:foundEvent});
+
     });
 });
 
