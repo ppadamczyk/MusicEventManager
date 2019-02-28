@@ -38,7 +38,7 @@ router.post("/events", middleware.isLoggedIn, function(req, res){
 });
 
 router.get("/events/:id/marketplace", middleware.isLoggedIn, function(req, res) {
-    Event.findById(req.params.id).populate("contractors").exec(function(err, foundEvent) {
+    Event.findById(req.params.id).populate("contractors.artists contractors.techs contractors.gear_owners contractors.place_owner").exec(function(err, foundEvent) {
         res.render("events/marketplace", {event:foundEvent});
     });
 });
@@ -52,6 +52,29 @@ router.post('/events/get', function(req, res) {
             foundOffers : foundOffers
         };
         res.send(msg);
+    });
+});
+
+
+
+router.get("/events/:eventid", middleware.isLoggedIn, function(req, res) {
+    console.log(req.params.eventid);
+    Event.findById(req.params.eventid).deepPopulate('contractors.artists contractors.techs contractors.gear_owners contractors.place_owner').exec(function(err, foundEvent) {
+        if(err){
+            console.log(err);
+        }
+        console.log(foundEvent);
+        res.render("events/show", {event:foundEvent});
+
+    });
+});
+
+router.get("/events/:id/manage", middleware.isLoggedIn, function(req, res) {
+    Event.findById(req.params.id).deepPopulate("contractors.artists contractors.techs contractors.gear_owners contractors.place_owner").exec(function(err, foundEvent){
+        if(err){
+            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +err);
+        }
+        res.render("events/manage", {event:foundEvent});
     });
 });
 
@@ -85,18 +108,6 @@ router.get("/events/:event_id/:offer_id", middleware.isLoggedIn, function(req, r
         });
     });
     
-});
-
-router.get("/events/:eventid", middleware.isLoggedIn, function(req, res) {
-    console.log(req.params.eventid);
-    Event.findById(req.params.eventid).deepPopulate('contractors.artists contractors.techs contractors.gear_owners contractors.place_owner').exec(function(err, foundEvent) {
-        if(err){
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +err);
-        }
-        console.log(foundEvent);
-        res.render("events/show", {event:foundEvent});
-
-    });
 });
 
 module.exports = router;
