@@ -14,7 +14,55 @@
                     <% event.tasks.artists.forEach(function(task){ %>
                         <div class="card">
                             <div class="card-title">
-                                <%=task.title%>
+                                <h4><%=task.title%></h4>
+                            </div>
+                            <div class="card-body">
+                                <p><%=task.text%></p>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+             <div class="col-3">
+                <div class="jumbotron">
+                    <h2>Technicians tasks</h2>
+                    <a class="btn btn-primary" href="/events/<%=event._id%>/tasks/new">Add new task</a>
+                    <% event.tasks.techs.forEach(function(task){ %>
+                        <div class="card">
+                            <div class="card-title">
+                                <h4><%=task.title%></h4>
+                            </div>
+                            <div class="card-body">
+                                <p><%=task.text%></p>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+             <div class="col-3">
+                <div class="jumbotron">
+                    <h2>Gear owners tasks</h2>
+                    <a class="btn btn-primary" href="/events/<%=event._id%>/tasks/new">Add new task</a>
+                    <% event.tasks.gear_owners.forEach(function(task){ %>
+                        <div class="card">
+                            <div class="card-title">
+                                <h4><%=task.title%></h4>
+                            </div>
+                            <div class="card-body">
+                                <p><%=task.text%></p>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+             <div class="col-3">
+                <div class="jumbotron">
+                    <h2>Place owner tasks</h2>
+                    <a class="btn btn-primary" href="/events/<%=event._id%>/tasks/new">Add new task</a>
+                    <% event.tasks.place_owner.forEach(function(task){ %>
+                        <div class="card">
+                            <div class="card-title">
+                                <h4><%=task.title%></h4>
                             </div>
                             <div class="card-body">
                                 <p><%=task.text%></p>

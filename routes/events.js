@@ -49,7 +49,6 @@ router.get("/events/:id/marketplace", middleware.isLoggedIn, function(req, res) 
     });
 });
 
-
 router.post('/events/get', function(req, res) {
     let id = req.body.id;
     Offer.find({type:id}, function(err, foundOffers){
@@ -60,8 +59,6 @@ router.post('/events/get', function(req, res) {
         res.send(msg);
     });
 });
-
-
 
 router.get("/events/:eventid", middleware.isLoggedIn, function(req, res) {
     console.log(req.params.eventid);
@@ -113,7 +110,7 @@ router.post("/events/:id/tasks", middleware.isLoggedIn, function(req, res){
             foundEvent.tasks.place_owner.push(newTask);
             foundEvent.save();
             }
-        res.redirect("events/"+req.params.id+"/manage");
+        res.redirect("/events/"+req.params.id+"/manage");
     });
 });
 

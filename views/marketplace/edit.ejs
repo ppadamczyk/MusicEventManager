@@ -1,0 +1,27 @@
+<% include ../partials/header %> 
+
+
+<div class="container">
+    <div class="row">
+        <div style="width: 30%; margin: 25px auto;">
+            <h1 style="text-align: center;">Edit <%= offer.offer_name %> offer</h1>
+            <form action="/marketplace/<%= offer._id %>/?_method=PUT" method="post">
+                <div class="form-group">
+                    <input type="text" class="login-form" name="offer[offer_name]" value="<%=offer.offer_name%>">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="login-form" name="offer[description]" value="<%=offer.description%>">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="login-form" name="offer[picture]" value="<%=offer.picture%>">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="login-form" name="offer[price]" value="<%=offer.price%>">
+                </div>
+                <button class="btn btn-lg btn-primary btn-block">Update offer</button>
+            </form>
+            <a href="/marketplace">Go back</a>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %> 

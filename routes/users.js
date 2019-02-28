@@ -68,14 +68,17 @@ router.get("/users/:id/reviews", middleware.isLoggedIn, middleware.isOwnProfile,
         res.render("users/reviews", {user:foundUser});
     });
 });
+
 router.get("/users/:id/events", middleware.isLoggedIn, function(req, res) {
     User.findById(req.params.id).populate("events").exec(function(err, foundUser){
         res.render("users/events", {user:foundUser});
     });
 });
+
 router.get("/users/:id/offers", middleware.isLoggedIn, function(req, res) {
     User.findById(req.params.id).populate("offers").exec(function(err, foundUser){
         res.render("users/offers", {user:foundUser});
     });
 });
+
 module.exports = router;

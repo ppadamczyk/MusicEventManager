@@ -56,6 +56,33 @@ router.get("/marketplace/:id", function(req, res) {
     });
 });
 
+router.get("/marketplace/:id/edit", function(req, res) {
+    Offer.findById(req.params.id,function(err, foundOffer){
+        if(err){
+            console.log(err);
+        }
+        res.render("marketplace/edit", {offer:foundOffer});
+    });
+});
+
+router.put("/marketplace/:id", function(req, res){
+   Offer.findOneAndUpdate(req.params.id, req.body.offer, function(err, updatedOffer){
+       if(err){
+           console.log(err);
+       }
+       res.redirect("/marketplace/" + req.params.id);
+   }) ;
+});
+
+router.delete("/marketplace/:id", function(req, res){
+   Offer.findOneAndDelete(req.params.id, function(err){
+       if(err){
+           console.log(err);
+       }
+       res.redirect("/marketplace");
+   });
+});
+
 router.get("/marketplace/:id/details", middleware.isLoggedIn, function(req, res) {
     Offer.findById(req.params.id,function(err, foundOffer){
         if(err){
@@ -64,4 +91,5 @@ router.get("/marketplace/:id/details", middleware.isLoggedIn, function(req, res)
         res.render("marketplace/details", {offer:foundOffer, event:req.user.events.slice(-1)[0]});
     });
 });
+
 module.exports = router;
