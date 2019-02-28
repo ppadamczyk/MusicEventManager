@@ -33,7 +33,6 @@
     </div>
 <script>
     $("button").click(function(){
-    console.log("asdasd");
     let id = $(this).attr("id");
    $.ajax({
         method: "POST",
@@ -43,9 +42,7 @@
         }
     })
     .done(function(msg) {
-        console.log(msg);
         msg.foundOffers.forEach(function (offer){
-            console.log(offer);
             $("#" + id).attr("disabled", "disabled");
             $("#" + id + "_place").append("<div>"+"<img/>"+"<div>" + offer.offer_name + "</div>"+ "<a>Show details</a>"+"</div>");
             $("#" + id + "_place div").addClass("card ");
