@@ -12,6 +12,9 @@ router.get("/events/new", middleware.isLoggedIn, function(req, res) {
 
 router.post("/events", middleware.isLoggedIn, function(req, res){
     User.findById(req.user._id).populate("events").exec(function(err, foundUser){
+        if(err){
+            console.log(err);
+        }
         var event_name = req.body.event_name;
         var picture = req.body.picture;
         var description = req.body.description;
@@ -20,7 +23,7 @@ router.post("/events", middleware.isLoggedIn, function(req, res){
             username: req.user.username
         };
         var keepUser = foundUser;
-        var newEvent = {event_name: event_name, picture:picture, description: description, author:author};
+        var newEvent = {event_name: event_name, picture:picture, description: description, author:author, isFinished:false};
         // Create a new event and save to DB
         Event.create(newEvent, function(err, newlyCreated){
             newlyCreated.save();
@@ -34,11 +37,14 @@ router.post("/events", middleware.isLoggedIn, function(req, res){
                 res.redirect("/events/" + newlyCreated._id +"/marketplace");
             }
         });
-});
+    });
 });
 
 router.get("/events/:id/marketplace", middleware.isLoggedIn, function(req, res) {
     Event.findById(req.params.id).populate("contractors.artists contractors.techs contractors.gear_owners contractors.place_owner").exec(function(err, foundEvent) {
+        if(err){
+            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + err);
+        }
         res.render("events/marketplace", {event:foundEvent});
     });
 });
@@ -65,14 +71,56 @@ router.get("/events/:eventid", middleware.isLoggedIn, function(req, res) {
         }
         console.log(foundEvent);
         res.render("events/show", {event:foundEvent});
+    });
+});
 
+router.get("/events/:id/tasks/new", middleware.isLoggedIn, function(req, res) {
+    Event.findById(req.params.id, function(err, foundEvent) {
+        if(err){
+            console.log(err);
+        }
+        res.render("events/tasks/new", {event:foundEvent});
+    });
+});
+
+router.post("/events/:id/tasks", middleware.isLoggedIn, function(req, res){
+    let taskType = req.body.type;
+    var newTask ={
+        title:req.body.title,
+        text:req.body.text,
+        priority:false
+        };
+    if(req.body.priority.checked){
+        console.log("CHECKED!");
+        }
+    Event.findById(req.params.id, function(err, foundEvent){
+        if(err){
+            console.log(err);
+        }
+        if(taskType=="artist"){
+            foundEvent.tasks.artists.push(newTask);
+            foundEvent.save();
+            }
+        if(taskType=="tech"){
+            foundEvent.tasks.techs.push(newTask);
+            foundEvent.save();
+            }
+        if(taskType=="gear_owner"){
+            foundEvent.tasks.gear_owners.push(newTask);
+            foundEvent.save();
+            }
+        if(taskType=="place_owner"){
+            foundEvent.tasks.place_owner.push(newTask);
+            foundEvent.save();
+            }
+        res.redirect("events/"+req.params.id+"/manage");
     });
 });
 
 router.get("/events/:id/manage", middleware.isLoggedIn, function(req, res) {
     Event.findById(req.params.id).deepPopulate("contractors.artists contractors.techs contractors.gear_owners contractors.place_owner").exec(function(err, foundEvent){
         if(err){
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +err);
+            console.log(err);
         }
         res.render("events/manage", {event:foundEvent});
     });
@@ -107,7 +155,6 @@ router.get("/events/:event_id/:offer_id", middleware.isLoggedIn, function(req, r
             res.redirect("/events/"+req.params.event_id+"/marketplace");
         });
     });
-    
 });
 
 module.exports = router;

@@ -1,1 +1,30 @@
-<h1>Manage route</h1>
+<% include ../partials/header %> 
+    <div class="container" style="text-align:center">
+            <div class="jumbotron">
+                <h1>All work is done?</h1>
+                <p>When your event is finished mark it as finished to enable all involved users adding review and feedback for each other</p>
+                <hr>
+                <a class="btn btn-primary" href="#">Mark event as finished</a>
+            </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="jumbotron">
+                    <h2>Artists tasks</h2>
+                    <a class="btn btn-primary" href="/events/<%=event._id%>/tasks/new">Add new task</a>
+                    <% event.tasks.artists.forEach(function(task){ %>
+                        <div class="card">
+                            <div class="card-title">
+                                <%=task.title%>
+                            </div>
+                            <div class="card-body">
+                                <p><%=task.text%></p>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+                
+        </div>
+    </div>
+
+<% include ../partials/footer %> 

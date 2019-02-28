@@ -5,6 +5,7 @@ var EventSchema = new mongoose.Schema({
     event_name : String,
     description: String,
     picture: String,
+    isFinished: Boolean,
     author:{
          id: {
          type: mongoose.Schema.Types.ObjectId,
@@ -35,6 +36,36 @@ var EventSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
             },
+    },
+    tasks:{
+        artists:[
+            {
+            title:String,
+            text:String,
+            priority:Boolean
+            }
+        ],
+        techs:[
+            {
+            title:String,
+            text:String,
+            priority:Boolean
+            }
+        ],
+        gear_owners:[
+            {
+            title:String,
+            text:String,
+            priority:Boolean
+            }
+        ],
+        place_owner:[
+            {
+            title:String,
+            text:String,
+            priority:Boolean
+            }
+        ]
     }
     
 });
