@@ -37,37 +37,12 @@ var EventSchema = new mongoose.Schema({
             ref: "User"
             },
     },
-    tasks:{
-        artists:[
-            {
-            title:String,
-            text:String,
-            priority:Boolean
-            }
-        ],
-        techs:[
-            {
-            title:String,
-            text:String,
-            priority:Boolean
-            }
-        ],
-        gear_owners:[
-            {
-            title:String,
-            text:String,
-            priority:Boolean
-            }
-        ],
-        place_owner:[
-            {
-            title:String,
-            text:String,
-            priority:Boolean
-            }
-        ]
-    }
-    
+    tasks:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Task"
+        },
+    ]
 });
 
 

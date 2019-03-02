@@ -5,6 +5,7 @@ var Event = require("../models/event");
 var Offer = require("../models/offer");
 var middleware = require("../middleware/index");
 var User = require("../models/user");
+var Task = require("../models/task");
 
 router.get("/events/new", middleware.isLoggedIn, function(req, res) {
     res.render("events/new");
@@ -81,41 +82,26 @@ router.get("/events/:id/tasks/new", middleware.isLoggedIn, function(req, res) {
 });
 
 router.post("/events/:id/tasks", middleware.isLoggedIn, function(req, res){
-    let taskType = req.body.type;
-    var newTask ={
-        title:req.body.title,
-        text:req.body.text,
-        priority:false
-        };
-    if(req.body.priority.checked){
-        console.log("CHECKED!");
-        }
+    let newTask = req.body.task;
+    newTask.author = req.user._id;
     Event.findById(req.params.id, function(err, foundEvent){
         if(err){
             console.log(err);
         }
-        if(taskType=="artist"){
-            foundEvent.tasks.artists.push(newTask);
-            foundEvent.save();
+        Task.create(newTask, function(err, newlyCreated){
+            if(err){
+                console.log(err);
             }
-        if(taskType=="tech"){
-            foundEvent.tasks.techs.push(newTask);
+            newlyCreated.save();
+            foundEvent.tasks.push(newlyCreated._id);
             foundEvent.save();
-            }
-        if(taskType=="gear_owner"){
-            foundEvent.tasks.gear_owners.push(newTask);
-            foundEvent.save();
-            }
-        if(taskType=="place_owner"){
-            foundEvent.tasks.place_owner.push(newTask);
-            foundEvent.save();
-            }
-        res.redirect("/events/"+req.params.id+"/manage");
+            res.redirect("/events/"+req.params.id+"/manage");
+        });
     });
 });
 
 router.get("/events/:id/manage", middleware.isLoggedIn, function(req, res) {
-    Event.findById(req.params.id).deepPopulate("contractors.artists contractors.techs contractors.gear_owners contractors.place_owner").exec(function(err, foundEvent){
+    Event.findById(req.params.id).deepPopulate("contractors.artists contractors.techs contractors.gear_owners contractors.place_owner tasks").exec(function(err, foundEvent){
         if(err){
             console.log(err);
         }
@@ -130,25 +116,12 @@ router.get("/events/:event_id/:offer_id", middleware.isLoggedIn, function(req, r
         }
         var offer = foundOffer;
         Event.findById(req.params.event_id,function(err, foundEvent){
-            if(err){
-                console.log(err);
-            }
-            if(offer.type=="artist"){
-            foundEvent.contractors.artists.push(offer.author.id);
+            if(err)console.log(err);
+            if(offer.type=="artist") foundEvent.contractors.artists.push(offer.author.id);
+            if(offer.type=="tech") foundEvent.contractors.techs.push(offer.author.id);
+            if(offer.type=="gear_owner") foundEvent.contractors.gear_owners.push(offer.author.id);
+            if(offer.type=="place_owner") foundEvent.contractors.place_owner=offer.author.id;
             foundEvent.save();
-            }
-            if(offer.type=="tech"){
-            foundEvent.contractors.techs.push(offer.author.id);
-            foundEvent.save();
-            }
-            if(offer.type=="gear_owner"){
-            foundEvent.contractors.gear_owners.push(offer.author.id);
-            foundEvent.save();
-            }
-            if(offer.type=="place_owner"){
-            foundEvent.contractors.place_owner=offer.author.id;
-            foundEvent.save();
-            }
             res.redirect("/events/"+req.params.event_id+"/marketplace");
         });
     });

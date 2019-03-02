@@ -4,6 +4,7 @@ var express = require("express"),
     mongoose    = require("mongoose"),
     User        = require("./models/user"),
     Offer       = require("./models/offer"),
+    Task       = require("./models/task"),
     passport    = require("passport"),
     LocalStrategy = require("passport-local"),
     flash        = require("connect-flash"),
@@ -36,6 +37,7 @@ var indexRoutes = require("./routes/index");
 var marketplaceRoutes = require("./routes/marketplace");
 var eventRoutes = require("./routes/events");
 var userRoutes = require("./routes/users");
+var taskRoutes = require("./routes/tasks");
 
 
 mongoose.connect("mongodb://localhost/music_event_manager", { useNewUrlParser: true });
@@ -48,6 +50,7 @@ app.use("/", indexRoutes);
 app.use("/", marketplaceRoutes);
 app.use("/", eventRoutes);
 app.use("/", userRoutes);
+app.use("/", taskRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Server is up!");

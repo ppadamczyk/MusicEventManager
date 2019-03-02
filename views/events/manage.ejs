@@ -11,13 +11,16 @@
                 <div class="jumbotron jumbix">
                     <h2>Artists tasks</h2>
                     <a class="btn btn-primary" href="/events/<%=event._id%>/tasks/new">Add new task</a> <hr>
-                    <% event.tasks.artists.forEach(function(task){ %>
+                    <% event.tasks.filter(function(task){return task.type==="artist"}).forEach(function(task){ %>
                         <div class="card mt-2">
                                 <h4><%=task.title%></h4>
                                 <p><%=task.text%></p>
                                 <div class="btn-group btn-group-sm">
                                     <button style="display: inline" class="btn btn-xs btn-success">Done</button>
-                                    <button style="display: inline" class="btn btn-xs btn-danger">Delete</button>
+                                    <form method="POST" action="/events/<%=event._id%>/tasks/<%=task._id%>?_method=DELETE">
+                                        <button style="display: inline" class="btn btn-xs btn-danger" href="">Delete</button>
+                                    </form>
+                                    
                                 </div>
                         </div>
                     <% }); %>
@@ -27,13 +30,15 @@
                 <div class="jumbotron jumbix">
                     <h2>Technicians tasks</h2>
                     <a class="btn btn-primary" href="/events/<%=event._id%>/tasks/new">Add new task</a> <hr>
-                    <% event.tasks.techs.forEach(function(task){ %>
+                    <% event.tasks.filter(function(task){return task.type==="tech"}).forEach(function(task){ %>
                        <div class="card mt-2">
                                 <h4><%=task.title%></h4>
                                 <p><%=task.text%></p>
                                 <div class="btn-group btn-group-sm">
                                     <button style="display: inline" class="btn btn-xs btn-success">Done</button>
-                                    <button style="display: inline" class="btn btn-xs btn-danger">Delete</button>
+                                    <form method="POST" action="/events/<%=event._id%>/tasks/<%=task._id%>?_method=DELETE">
+                                        <button style="display: inline" class="btn btn-xs btn-danger" href="">Delete</button>
+                                    </form>
                                 </div>
                         </div>
                     <% }); %>
@@ -43,13 +48,15 @@
                 <div class="jumbotron jumbix">
                     <h2>Gear owners tasks</h2>
                     <a class="btn btn-primary" href="/events/<%=event._id%>/tasks/new">Add new task</a> <hr>
-                    <% event.tasks.gear_owners.forEach(function(task){ %>
+                    <% event.tasks.filter(function(task){return task.type==="gear_owner"}).forEach(function(task){ %>
                         <div class="card mt-2">
                                 <h4><%=task.title%></h4>
                                 <p><%=task.text%></p>
                                 <div class="btn-group btn-group-sm">
                                     <button style="display: inline" class="btn btn-xs btn-success">Done</button>
-                                    <button style="display: inline" class="btn btn-xs btn-danger">Delete</button>
+                                    <form method="POST" action="/events/<%=event._id%>/tasks/<%=task._id%>?_method=DELETE">
+                                        <button style="display: inline" class="btn btn-xs btn-danger" href="">Delete</button>
+                                    </form>
                                 </div>
                         </div>
                     <% }); %>
@@ -59,13 +66,15 @@
                 <div class="jumbotron jumbix">
                     <h2 style="vertical-align: text-top">Place owner tasks</h2>
                     <a class="btn btn-primary" href="/events/<%=event._id%>/tasks/new">Add new task</a> <hr>
-                    <% event.tasks.place_owner.forEach(function(task){ %>
+                    <% event.tasks.filter(function(task){return task.type==="place_owner"}).forEach(function(task){ %>
                         <div class="card mt-2">
                                 <h4><%=task.title%></h4>
                                 <p><%=task.text%></p>
                                 <div class="btn-group btn-group-sm">
                                     <button style="display: inline" class="btn btn-xs btn-success">Done</button>
-                                    <button style="display: inline" class="btn btn-xs btn-danger">Delete</button>
+                                    <form method="POST" action="/events/<%=event._id%>/tasks/<%=task._id%>?_method=DELETE">
+                                        <button style="display: inline" class="btn btn-xs btn-danger" href="">Delete</button>
+                                    </form>
                                 </div>
                         </div>
                     <% }); %>
