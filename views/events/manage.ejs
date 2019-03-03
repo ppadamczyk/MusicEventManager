@@ -140,7 +140,45 @@
                 <h1>The event has finished</h1>
                 <p>Take a moment to evaluate yours contractors work</p>
                 <hr>
-                <a class="btn btn-primary" href="#">Add review</a>
+                <div class="row">
+                        <div class="col-3">
+                            <h2>Artists:</h2><hr>
+                            <% event.contractors.artists.forEach(function(contractor){ %>
+                            <div>
+                                <h4><%= contractor.username %></h4>
+                                <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
+                            </div>
+                            <% });%>
+                        </div>
+                        <div class="col-3">
+                            <h2>Technicians:</h2><hr>
+                            <% event.contractors.techs.forEach(function(contractor){ %>
+                                <div>
+                                    <h4><%= contractor.username %></h4>
+                                    <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
+                                </div>
+                            <% });%>
+                        </div>
+                        <div class="col-3">
+                            <h2>Gear owners:</h2><hr>
+                            <% event.contractors.gear_owners.forEach(function(contractor){ %>
+                                <div>
+                                    <h4><%= contractor.username %></h4>
+                                    <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
+                                </div>
+                            <% });%>
+                        </div>
+                        <div class="col-3">
+                            <h2>Place owner:</h2><hr>
+                            <% if(event.contractors.place_owner){%>
+                            <div>
+                                <h4><%= event.contractors.place_owner.username %></h4>
+                                <a class="btn btn-primary" href="/users/<%=event.contractors.place_owner._id%>/reviews/new">Add review</a>
+                            </div>
+                            <% } %>
+                        </div>
+                        </div>
+                
             </div>
         <% } %>
     </div>
