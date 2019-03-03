@@ -1,10 +1,11 @@
 <% include ../partials/header %> 
     <div class="container" style="text-align:center">
+        <% if(!event.isFinished) {%>
             <div class="jumbotron">
                 <h1>All work is done?</h1>
                 <p>When your event is finished mark it as finished to enable all involved users adding review and feedback for each other</p>
                 <hr>
-                <a class="btn btn-primary" href="#">Mark event as finished</a>
+                <a class="btn btn-primary" href="/events/<%=event._id%>/done">Mark event as finished</a>
             </div>
         <div class="row">
             <div class="col-3">
@@ -20,7 +21,6 @@
                                     <form method="POST" action="/events/<%=event._id%>/tasks/<%=task._id%>?_method=DELETE">
                                         <button style="display: inline" class="btn btn-xs btn-danger" href="">Delete</button>
                                     </form>
-                                    
                                 </div>
                         </div>
                     <% }); %>
@@ -80,24 +80,75 @@
                     <% }); %>
                 </div>
             </div>
-                
+            </div>
+                <div class="jumbotron">
+                    <h1>Contractors involved in this event:</h1><hr>
+                    <div class="row">
+                        <div class="col-3">
+                            <h2>Artists:</h2><hr>
+                            <% event.contractors.artists.forEach(function(contractor){ %>
+                            <div>
+                                <h4><%= contractor.username %></h4>
+                                <div class="btn-group btn-group-sm">
+                                    <a class="btn btn-primary" href="#">Contact user</a>
+                                    <a class="btn btn-danger" href="#">Report user</a>
+                                </div>
+                            </div>
+                            <% });%>
+                        </div>
+                        <div class="col-3">
+                            <h2>Technicians:</h2><hr>
+                            <% event.contractors.techs.forEach(function(contractor){ %>
+                                <div>
+                                    <h4><%= contractor.username %></h4>
+                                    <div class="btn-group btn-group-sm">
+                                        <a class="btn btn-primary" href="#">Contact user</a>
+                                        <a class="btn btn-danger" href="#">Report user</a>
+                                    </div>
+                                </div>
+                            <% });%>
+                        </div>
+                        <div class="col-3">
+                            <h2>Gear owners:</h2><hr>
+                            <% event.contractors.gear_owners.forEach(function(contractor){ %>
+                                <div>
+                                    <h4><%= contractor.username %></h4>
+                                    <div class="btn-group btn-group-sm">
+                                        <a class="btn btn-primary" href="#">Contact user</a>
+                                        <a class="btn btn-danger" href="#">Report user</a>
+                                    </div>
+                                </div>
+                            <% });%>
+                        </div>
+                        <div class="col-3">
+                            <h2>Place owner:</h2><hr>
+                            <div>
+                                <h4><%= event.contractors.place_owner.username %></h4>
+                                <div class="btn-group btn-group-sm">
+                                    <a class="btn btn-primary" href="#">Contact user</a>
+                                    <a class="btn btn-danger" href="#">Report user</a>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    <hr>
+                    <a class="btn btn-primary" href="/events/<%=event._id%>/marketplace">Browse additional offers</a>
+            </div>
         </div>
+        <% } else {%>
+            <div class="jumbotron">
+                <h1>The event has finished</h1>
+                <p>Take a moment to evaluate yours contractors work</p>
+                <hr>
+                <a class="btn btn-primary" href="#">Add review</a>
+            </div>
+        <% } %>
     </div>
 <script>
     $(".btn-success").click(function(){
         $(this).parent().parent().css( "background-color", "#5cb85c" );
          $(this).parent().parent().css( "color", "white" );
     });
-    
-//     $(".btn-danger").click(function(){
-//     let id = $(this).attr("id");
-//   $.ajax({
-//         method: "POST",
-//         url: "/events/"+event.id+"/tasks?_method=DELETE",
-//         data: {
-//             id:id
-//         }
-//     })
 </script>
 
 <% include ../partials/footer %> 

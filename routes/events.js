@@ -109,6 +109,15 @@ router.get("/events/:id/manage", middleware.isLoggedIn, function(req, res) {
     });
 });
 
+router.get("/events/:id/done", function(req, res){
+    Event.findById(req.params.id, function(err, foundEvent) {
+        if(err) console.log(err);
+        foundEvent.isFinished = true;
+        foundEvent.save();
+        res.redirect("/events/"+req.params.id+"/manage");
+    });
+});
+
 router.get("/events/:event_id/:offer_id", middleware.isLoggedIn, function(req, res) {
     Offer.findById(req.params.offer_id,function(err, foundOffer) {
         if(err){
