@@ -1,18 +1,18 @@
 <% include ../partials/header %> 
     <div class="container" style="text-align:center">
-        <% if(!event.isFinished) {%>
+        <% if(!event.isFinished){%>
             <div class="jumbotron">
                 <h1>All work is done?</h1>
                 <p>When your event is finished mark it as finished to enable all involved users adding review and feedback for each other</p>
                 <hr>
                 <a class="btn btn-primary" href="/events/<%=event._id%>/done">Mark event as finished</a>
             </div>
-        <div class="row">
+            <div class="row">
             <div class="col-3">
                 <div class="jumbotron jumbix">
                     <h2>Artists tasks</h2>
                     <a class="btn btn-primary" href="/events/<%=event._id%>/tasks/new">Add new task</a> <hr>
-                    <% event.tasks.filter(function(task){return task.type==="artist"}).forEach(function(task){ %>
+                    <% event.tasks.filter(function(task){return task.role==="artist"}).forEach(function(task){ %>
                         <div class="card mt-2">
                                 <h4><%=task.title%></h4>
                                 <p><%=task.text%></p>
@@ -30,7 +30,7 @@
                 <div class="jumbotron jumbix">
                     <h2>Technicians tasks</h2>
                     <a class="btn btn-primary" href="/events/<%=event._id%>/tasks/new">Add new task</a> <hr>
-                    <% event.tasks.filter(function(task){return task.type==="tech"}).forEach(function(task){ %>
+                    <% event.tasks.filter(function(task){return task.role==="tech"}).forEach(function(task){ %>
                        <div class="card mt-2">
                                 <h4><%=task.title%></h4>
                                 <p><%=task.text%></p>
@@ -48,7 +48,7 @@
                 <div class="jumbotron jumbix">
                     <h2>Gear owners tasks</h2>
                     <a class="btn btn-primary" href="/events/<%=event._id%>/tasks/new">Add new task</a> <hr>
-                    <% event.tasks.filter(function(task){return task.type==="gear_owner"}).forEach(function(task){ %>
+                    <% event.tasks.filter(function(task){return task.role==="gear_owner"}).forEach(function(task){ %>
                         <div class="card mt-2">
                                 <h4><%=task.title%></h4>
                                 <p><%=task.text%></p>
@@ -66,7 +66,7 @@
                 <div class="jumbotron jumbix">
                     <h2 style="vertical-align: text-top">Place owner tasks</h2>
                     <a class="btn btn-primary" href="/events/<%=event._id%>/tasks/new">Add new task</a> <hr>
-                    <% event.tasks.filter(function(task){return task.type==="place_owner"}).forEach(function(task){ %>
+                    <% event.tasks.filter(function(task){return task.role==="place_owner"}).forEach(function(task){ %>
                         <div class="card mt-2">
                                 <h4><%=task.title%></h4>
                                 <p><%=task.text%></p>
@@ -76,19 +76,19 @@
                                         <button style="display: inline" class="btn btn-xs btn-danger" href="">Delete</button>
                                     </form>
                                 </div>
-                        </div>
-                    <% }); %>
+                            </div>
+                        <% }); %>
+                    </div>
                 </div>
-            </div>
             </div>
                 <div class="jumbotron">
                     <h1>Contractors involved in this event:</h1><hr>
                     <div class="row">
                         <div class="col-3">
                             <h2>Artists:</h2><hr>
-                            <% event.contractors.artists.forEach(function(contractor){ %>
+                            <% event.contractors.filter(function(contractor){return contractor.role==="artist"}).forEach(function(contractor){ %>
                             <div>
-                                <h4><%= contractor.username %></h4>
+                                <h4><%= contractor.contractor_id.username %></h4>
                                 <div class="btn-group btn-group-sm">
                                     <a class="btn btn-primary" href="#">Contact user</a>
                                     <a class="btn btn-danger" href="#">Report user</a>
@@ -98,9 +98,9 @@
                         </div>
                         <div class="col-3">
                             <h2>Technicians:</h2><hr>
-                            <% event.contractors.techs.forEach(function(contractor){ %>
+                            <% event.contractors.filter(function(contractor){return contractor.role==="tech"}).forEach(function(contractor){  %>
                                 <div>
-                                    <h4><%= contractor.username %></h4>
+                                    <h4><%= contractor.contractor_id.username %></h4>
                                     <div class="btn-group btn-group-sm">
                                         <a class="btn btn-primary" href="#">Contact user</a>
                                         <a class="btn btn-danger" href="#">Report user</a>
@@ -110,9 +110,9 @@
                         </div>
                         <div class="col-3">
                             <h2>Gear owners:</h2><hr>
-                            <% event.contractors.gear_owners.forEach(function(contractor){ %>
+                            <% event.contractors.filter(function(contractor){return contractor.role==="gear_owner"}).forEach(function(contractor){  %>
                                 <div>
-                                    <h4><%= contractor.username %></h4>
+                                    <h4><%= contractor.contractor_id.username %></h4>
                                     <div class="btn-group btn-group-sm">
                                         <a class="btn btn-primary" href="#">Contact user</a>
                                         <a class="btn btn-danger" href="#">Report user</a>
@@ -122,71 +122,71 @@
                         </div>
                         <div class="col-3">
                             <h2>Place owner:</h2><hr>
-                            <div>
-                                <h4><%= event.contractors.place_owner.username %></h4>
-                                <div class="btn-group btn-group-sm">
-                                    <a class="btn btn-primary" href="#">Contact user</a>
-                                    <a class="btn btn-danger" href="#">Report user</a>
+                                <h4><% event.contractors.filter(function(contractor){return contractor.role==="place_owner"}).forEach(function(contractor){  %></h4>
+                                <div>
+                                    <h4><%= contractor.contractor_id.username %></h4>
+                                    <div class="btn-group btn-group-sm">
+                                        <a class="btn btn-primary" href="#">Contact user</a>
+                                        <a class="btn btn-danger" href="#">Report user</a>
+                                    </div>
                                 </div>
-                            </div>
+                            <% });%>
                         </div>
-                        </div>
+                    </div>
                     <hr>
-                    <a class="btn btn-primary" href="/events/<%=event._id%>/marketplace">Browse additional offers</a>
+                <a class="btn btn-primary" href="/events/<%=event._id%>/marketplace">Browse additional offers</a>
+                </div>
             </div>
-        </div>
         <% } else {%>
             <div class="jumbotron">
                 <h1>The event has finished</h1>
                 <p>Take a moment to evaluate yours contractors work</p>
                 <hr>
                 <div class="row">
-                        <div class="col-3">
-                            <h2>Artists:</h2><hr>
-                            <% event.contractors.artists.forEach(function(contractor){ %>
+                    <div class="col-3">
+                        <h2>Artists:</h2><hr>
+                        <% event.contractors.filter(function(contractor){return contractor.role==="artist"}).forEach(function(contractor){ %>
+                        <div>
+                            <h4><%= contractor.contractor_id.username %></h4>
+                            <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
+                        </div>
+                        <% });%>
+                    </div>
+                    <div class="col-3">
+                        <h2>Technicians:</h2><hr>
+                        <% event.contractors.filter(function(contractor){return contractor.role==="tech"}).forEach(function(contractor){ %>
                             <div>
-                                <h4><%= contractor.username %></h4>
+                                <h4><%= contractor.contractor_id.username %></h4>
                                 <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
                             </div>
-                            <% });%>
-                        </div>
-                        <div class="col-3">
-                            <h2>Technicians:</h2><hr>
-                            <% event.contractors.techs.forEach(function(contractor){ %>
-                                <div>
-                                    <h4><%= contractor.username %></h4>
-                                    <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
-                                </div>
-                            <% });%>
-                        </div>
-                        <div class="col-3">
-                            <h2>Gear owners:</h2><hr>
-                            <% event.contractors.gear_owners.forEach(function(contractor){ %>
-                                <div>
-                                    <h4><%= contractor.username %></h4>
-                                    <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
-                                </div>
-                            <% });%>
-                        </div>
-                        <div class="col-3">
-                            <h2>Place owner:</h2><hr>
-                            <% if(event.contractors.place_owner){%>
+                        <% });%>
+                    </div>
+                    <div class="col-3">
+                        <h2>Gear owners:</h2><hr>
+                        <% event.contractors.filter(function(contractor){return contractor.role==="gear_owner"}).forEach(function(contractor){ %>
                             <div>
-                                <h4><%= event.contractors.place_owner.username %></h4>
-                                <a class="btn btn-primary" href="/users/<%=event.contractors.place_owner._id%>/reviews/new">Add review</a>
+                                <h4><%= contractor.contractor_id.username %></h4>
+                                <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
                             </div>
-                            <% } %>
-                        </div>
-                        </div>
-                
+                        <% });%>
+                    </div>
+                    <div class="col-3">
+                        <h2>Place owner:</h2><hr>
+                        <% event.contractors.filter(function(contractor){return contractor.role==="place_owner"}).forEach(function(contractor){ %>
+                            <div>
+                                <h4><%= contractor.contractor_id.username %></h4>
+                                <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
+                            </div>
+                        <% });%>
+                    </div>
+                </div>
             </div>
+        </div>
         <% } %>
-    </div>
 <script>
     $(".btn-success").click(function(){
         $(this).parent().parent().css( "background-color", "#5cb85c" );
          $(this).parent().parent().css( "color", "white" );
     });
 </script>
-
 <% include ../partials/footer %> 

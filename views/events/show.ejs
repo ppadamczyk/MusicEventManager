@@ -13,33 +13,35 @@
             <div class="col-3">
             <div class="jumbotron">
                 <h4>Artists:</h4>
-                <% event.contractors.artists.forEach(function(artist){ %>
-                    <li><%= artist.username %></li>
+                <% event.contractors.filter(function(contractor){return contractor.role==="artist"}).forEach(function(contractor){ %>
+                    <% if(contractor.isConfirmed){ %>
+                    <li><%= contractor.contractor_id.username %></li>
+                    <% } %>
                 <% }); %>
             </div>
         </div>
         <div class="col-3">
             <div class="jumbotron">
                 <h4>Technicians:</h4>
-                <% event.contractors.techs.forEach(function(tech){ %>
-                    <li><%= tech.username %></li>
+                <% event.contractors.filter(function(contractor){return contractor.role==="tech"}).forEach(function(contractor){ %>
+                    <li><%= contractor.contractor_id.username %></li>
                 <% }); %>
             </div>
         </div>
         <div class="col-3">
             <div class="jumbotron">
                 <h4>Gear organizers:</h4>
-                <% event.contractors.gear_owners.forEach(function(gear_owner){ %>
-                    <li><%= gear_owner.username %></li>
+                <% event.contractors.filter(function(contractor){return contractor.role==="gear_owner"}).forEach(function(contractor){ %>
+                    <li><%= contractor.contractor_id.username %></li>
                 <% }); %>
             </div>
         </div>
         <div class="col-3">
             <div class="jumbotron" >
                 <h4>Place owner:</h4>
-                <% if(event.contractors.place_owner!=undefined){ %>
-                <li><%=event.contractors.place_owner.username%></li>
-                <% } %>
+                <% event.contractors.filter(function(contractor){return contractor.role==="place_owner"}).forEach(function(contractor){ %>
+                    <li><%= contractor.contractor_id.username %></li>
+                <% }); %>
             </div>
         </div>
         </div>

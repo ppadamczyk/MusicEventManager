@@ -1,19 +1,17 @@
 <% include ../partials/header %> 
-
-
 <div class="container">
     <div class="row">
         <div style="width: 30%; margin: 25px auto;">
             <h1 style="text-align: center;">Write <%= user.username %>'s review</h1>
             <form action="/users/<%= user._id %>/reviews" method="post">
                 <div class="form-group">
-                    <input type="text" class="login-form" name="title" placeholder="title">
+                    <input type="text" class="login-form" name="review[title]" placeholder="title">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="login-form" name="text" placeholder="review">
+                    <input type="text" class="login-form" name="review[text]" placeholder="review">
                 </div>
                 <div class="form-group">
-                    <select name="grade">
+                    <select name="review[grade]">
                         <option value="10">10</option>
                         <option value="9">9</option>
                         <option value="8">8</option>

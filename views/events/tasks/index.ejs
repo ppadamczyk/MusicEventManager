@@ -1,0 +1,14 @@
+<% include ../partials/header %> 
+    <div class="container">
+      <div class="row">
+          <% user.contracts.forEach(function(contract){ %>
+            <% user.roles.filter(function(role){return role}).forEach(function(role){ %>
+                <% contract.tasks.filter(function(task){return task.role===role}).forEach(function(task){ %>
+                    <li><%= task.title %></li>
+              <% }); %>
+        <% }); %>
+    <% }); %>
+      </div>
+
+    </div>
+<% include ../partials/footer %> 

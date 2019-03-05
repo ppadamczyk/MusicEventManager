@@ -11,26 +11,28 @@ var UserSchema = new mongoose.Schema({
         place_owner: Boolean,
         gear_owner: Boolean
     },
-    reviews:[
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Review"
-        },
-    ],
-    events:[
-        {
+    reviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review"
+    }, ],
+    events: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Event"
+    }, ],
+    contracts: [{
+        contract_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Event"
         },
-    ],
-    offers:[
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Offer"
-        },
-    ]
+        role: String,
+        isConfirmed: Boolean
+    }, ],
+    offers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Offer"
+    }, ]
 });
 
-UserSchema.plugin(passportLocalMongoose)
+UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", UserSchema);

@@ -1,4 +1,4 @@
-<% include ../partials/header %> 
+<% include ../partials/header %>
     <div class="container" style="text-align:center">
         <div class="row">
             <div class="jumbotron">
@@ -28,7 +28,6 @@
                 <button class="btn btn-primary btn-lg" role="button" id="gear_owner">Find gear to rent</button>
             </div>
         </div>
-        
         </div>
     </div>
 <script>
@@ -50,9 +49,8 @@
             $("#" + id + "_place div img").last().attr('src', offer.picture);
             $("#" + id + "_place div a").addClass("btn btn-primary");
             $("#" + id + "_place div a").last().attr('href', '/marketplace/'+offer._id+'/details');
-
         });
-    }); 
+    });
 });
 </script>
-<% include ../partials/footer %> 
+<% include ../partials/footer %>

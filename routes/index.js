@@ -27,13 +27,10 @@ router.post("/register", middleware.fixRoles, function(req, res){
     var newUser = new User({username: req.body.username, roles: newRoles});
     User.register(newUser, req.body.password, function(err, user){
         if(err){
-            //req.flash("error", err.message);
             console.log(err);
             return res.render("register");
-            
         }
         passport.authenticate("local")(req, res, function(){
-           //req.flash("success", "Welcome to YelpCamp " + user.username);
            res.redirect("/main"); 
         });
     });

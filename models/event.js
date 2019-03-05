@@ -13,30 +13,16 @@ var EventSchema = new mongoose.Schema({
       },
       username: String
     },
-    contractors:{
-        artists: [
-            {
+    
+    contractors:[{
+        contractor_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-            },
-        ],
-        techs: [
-            {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-            },
-        ],
-        gear_owners: [
-            {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-            },
-        ],
-        place_owner:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-            },
-    },
+        },
+        role: String,
+        isConfirmed: Boolean
+    }],
+
     tasks:[
         {
             type: mongoose.Schema.Types.ObjectId,

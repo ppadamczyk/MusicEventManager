@@ -1,6 +1,4 @@
 <% include ../partials/header %> 
-
-
 <div class="container">
     <div class="row">
         <div style="width: 30%; margin: 25px auto;">
@@ -9,7 +7,6 @@
                 <div class="form-group">
                     <input type="text" class="login-form" name="offer_name" placeholder="offer name">
                 </div>
-                
                 <!--TYPE DECLARATION-->
                 <% if(currentUser.roles.artist===true){ %>
                 <div class="form-group">
@@ -31,8 +28,6 @@
                     <input type="radio" name="type" value="gear_owner">Gear Rental
                 </div>
                 <% } %>
-
-                
                 <div class="form-group">
                     <input type="text" class="login-form" name="description" placeholder="description">
                 </div>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+	<head>
 	<title>Music Event Manager</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="/stylesheets/main.css">
@@ -8,33 +8,31 @@
 		src="https://code.jquery.com/jquery-3.3.1.min.js"
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 		crossorigin="anonymous"></script>
-</head>
-<body>
-
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container">
-		  <a class="navbar-brand" href="/main">Mem</a>
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-		    <div class="navbar-nav">
-		    <a class="nav-item nav-link" href="/about">About</a>
-		      <% if(!currentUser){ %>
-			      <a class="nav-item nav-link" href="/login">Login</a>
-			      <a class="nav-item nav-link" href="/register">Sign up</a>
-		     <% } else { %>
-			      <a class="nav-item nav-link" href="/users/<%=currentUser._id%>" >My profile</a>
-			      <a class="nav-item nav-link" href="/logout">Logout</a>
-			      <% if(currentUser.roles.artist || currentUser.roles.tech || currentUser.roles.place_owner || currentUser.roles.gear_owner){ %>
-			    	<a class="nav-item nav-link" href="/users/<%= currentUser._id %>/offers">My offers</a>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+			  <a class="navbar-brand" href="/main">Mem</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			    <div class="navbar-nav">
+			    <a class="nav-item nav-link" href="/about">About</a>
+			      <% if(!currentUser){ %>
+				      <a class="nav-item nav-link" href="/login">Login</a>
+				      <a class="nav-item nav-link" href="/register">Sign up</a>
+			    <% } else { %>
+				      <a class="nav-item nav-link" href="/users/<%=currentUser._id%>" >My profile</a>
+				      <a class="nav-item nav-link" href="/logout">Logout</a>
+				      <% if(currentUser.roles.artist || currentUser.roles.tech || currentUser.roles.place_owner || currentUser.roles.gear_owner){ %>
+				    	<a class="nav-item nav-link" href="/users/<%= currentUser._id %>/offers">My offers</a>
+				      <% } %>
+				      <% if(currentUser.roles.organizer){ %>
+				    	<a class="nav-item nav-link" href="/users/<%= currentUser._id %>/events">My events</a>
+				      <% } %>
 			      <% } %>
-			      <% if(currentUser.roles.organizer){ %>
-			    	<a class="nav-item nav-link" href="/users/<%= currentUser._id %>/events">My events</a>
-			      <% } %>
-		      <% } %>
-		    </div>
-		  </div>
-		</div>
-	</nav>
-
+			    </div>
+			  </div>
+			</div>
+		</nav>
