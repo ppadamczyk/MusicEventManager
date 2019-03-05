@@ -27,6 +27,7 @@
 				      <a class="nav-item nav-link" href="/logout">Logout</a>
 				      <% if(currentUser.roles.artist || currentUser.roles.tech || currentUser.roles.place_owner || currentUser.roles.gear_owner){ %>
 				    	<a class="nav-item nav-link" href="/users/<%= currentUser._id %>/offers">My offers</a>
+				    	<a class="nav-item nav-link" href="/users/<%= currentUser._id %>/tasks">My tasks</a>
 				      <% } %>
 				      <% if(currentUser.roles.organizer){ %>
 				    	<a class="nav-item nav-link" href="/users/<%= currentUser._id %>/events">My events</a>

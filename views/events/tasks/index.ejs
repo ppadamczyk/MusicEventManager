@@ -1,14 +1,25 @@
-<% include ../partials/header %> 
+<% include ../../partials/header %> 
     <div class="container">
-      <div class="row">
-          <% user.contracts.forEach(function(contract){ %>
-            <% user.roles.filter(function(role){return role}).forEach(function(role){ %>
-                <% contract.tasks.filter(function(task){return task.role===role}).forEach(function(task){ %>
-                    <li><%= task.title %></li>
-              <% }); %>
-        <% }); %>
-    <% }); %>
-      </div>
-
+        <h1>These tasks belongs to you:</h1>
+        <div class="row">
+            <% user.contracts.forEach(function(contract){ %>
+            <div class="jumbotron jumbix col-4">
+                <h2><%= contract.contract_id.event_name %> tasks:</h2>
+                <% contract.contract_id.tasks.filter(function(task){return task.role===contract.role}).forEach(function(task){ %>
+                <div class="card mt-2">
+                    <h4><%=task.title%></h4><hr>
+                    <p><%=task.text%></p>
+                    <div class="btn-group btn-group-sm">
+                        <button style="display: inline" class="btn btn-xs btn-success">Done</button>
+                        <form method="POST" action="/events/<%=contract.contract_id._id%>/tasks/<%=task._id%>?_method=DELETE">
+                            <button style="display: inline" class="btn btn-xs btn-danger" href="">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+                
+          <% }); %>
+        </div>
     </div>
-<% include ../partials/footer %> 
+<% include ../../partials/footer %> 

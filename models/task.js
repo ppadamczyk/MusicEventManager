@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var taskSchema = mongoose.Schema({
     title: String,
@@ -18,5 +19,5 @@ var taskSchema = mongoose.Schema({
         username: String
     }
 });
-
+taskSchema.plugin(deepPopulate);
 module.exports = mongoose.model("Task", taskSchema);

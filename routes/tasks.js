@@ -18,8 +18,8 @@ router.delete("/events/:eventid/tasks/:id", middleware.isLoggedIn, function(req,
     });
 });
 
-router.get("/:user_id/tasks", middleware.isLoggedIn, function(req, res) {
-    User.findById(req.params.id).deepPopulate("contracts.contract_id").exec(function(err, foundUser) {
+router.get("/users/:user_id/tasks", middleware.isLoggedIn, function(req, res) {
+    User.findById(req.params.user_id).deepPopulate("contracts.contract_id contracts.contract_id.tasks").exec(function(err, foundUser) {
         if (err) console.log(err);
         res.render("events/tasks/index", { user: foundUser });
     });
