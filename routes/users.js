@@ -51,6 +51,13 @@ router.get("/users/:id/roles", middleware.isLoggedIn, middleware.isOwnProfile, f
     });
 });
 
+router.put("/users/:id/roles", middleware.isLoggedIn, function(req, res) {
+    User.findByIdAndUpdate(req.params.id, { roles: req.body.roles }, function(err, updatedUser) {
+        console.log(updatedUser);
+        res.redirect("/main");
+    });
+});
+
 router.get("/users/:id/reviews", middleware.isLoggedIn, middleware.isOwnProfile, function(req, res) {
     User.findById(req.params.id).populate("reviews").exec(function(err, foundUser) {
         if (err) console.log(err);

@@ -1,18 +1,18 @@
 <% include ../partials/header %>
-    <h1><%= user.username %> roles:</h1>
-    <% if(user.roles.organizer) { %>
-        <li>Organizer</li>
-    <% } %>
-    <% if(user.roles.tech) { %>
-        <li>Tech</li>
-    <% } %>
-    <% if(user.roles.artist) { %>
-        <li>Artist</li>
-    <% } %>
-    <% if(user.roles.place_owner) { %>
-        <li>Place owner</li>
-    <% } %>
-    <% if(user.roles.gear_owner) { %>
-        <li>Gear owner</li>
-    <% } %>
+    <div class="container" style="text-align:center">
+        <form method="POST" action="/users/<%=user._id%>/roles/?_method=PUT">
+            <h1>Update your roles:</h1>
+            <div class="form-group" >
+                <input type="checkbox" name="roles[organizer]" value="true" <% if(user.roles.organizer){ %> checked <% } %> > Organizer<br>
+                <input type="checkbox" name="roles[artist]" value="true" <% if(user.roles.artist){ %> checked <% } %>> Artist<br>
+                <input type="checkbox" name="roles[tech]" value="true" <% if(user.roles.tech){ %> checked <% } %>> Tech<br>
+                <input type="checkbox" name="roles[place_owner]" value="true" <% if(user.roles.place_owner){ %> checked <% } %>> Place owner<br>
+                <input type="checkbox" name="roles[gear_owner]" value="true" <% if(user.roles.gear_owner){ %> checked <% } %>> Gear owner<br>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block">Update roles</button>
+        </form>
+    </div>
+        
+    
+    
 <% include ../partials/footer %>

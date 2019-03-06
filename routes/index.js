@@ -16,15 +16,8 @@ router.get("/register", function(req, res) {
     res.render("register");
 });
 
-router.post("/register", middleware.fixRoles, function(req, res) {
-    var newRoles = {
-        organizer: req.body.organizer,
-        artist: req.body.artist,
-        tech: req.body.tech,
-        place_owner: req.body.place_owner,
-        gear_owner: req.body.gear_owner
-    };
-    var newUser = new User({ username: req.body.username, roles: newRoles, desc: "", picture: "https://forums.roku.com/styles/canvas/theme/images/no_avatar.jpg" });
+router.post("/register", function(req, res) {
+    var newUser = new User({ username: req.body.username, roles: req.body.roles, desc: "", picture: "https://forums.roku.com/styles/canvas/theme/images/no_avatar.jpg" });
     User.register(newUser, req.body.password, function(err, user) {
         if (err) {
             console.log(err);

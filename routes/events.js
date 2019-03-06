@@ -21,6 +21,9 @@ router.post("/events", middleware.isLoggedIn, function(req, res) {
         let newEvent = req.body.event;
         newEvent.author = author;
         newEvent.isFinished = false;
+        if (newEvent.picture === "") {
+            newEvent.picture = "https://www.leedsandyorkpft.nhs.uk/news/wp-content/uploads/sites/4/2017/03/events-icon-680x680.jpg";
+        }
         Event.create(newEvent, function(err, newlyCreated) {
             newlyCreated.save();
             foundUser.events.push(newlyCreated._id);
