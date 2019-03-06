@@ -14,15 +14,13 @@ router.get("/events/new", middleware.isLoggedIn, function(req, res) {
 router.post("/events", middleware.isLoggedIn, function(req, res) {
     User.findById(req.user._id, function(err, foundUser) {
         if (err) console.log(err);
-        var event_name = req.body.event_name;
-        var picture = req.body.picture;
-        var description = req.body.description;
-        var author = {
+        let author = {
             id: req.user._id,
             username: req.user.username
         };
-        var newEvent = { event_name: event_name, picture: picture, description: description, author: author, isFinished: false };
-        // Create a new event and save to DB
+        let newEvent = req.body.event;
+        newEvent.author = author;
+        newEvent.isFinished = false;
         Event.create(newEvent, function(err, newlyCreated) {
             newlyCreated.save();
             foundUser.events.push(newlyCreated._id);

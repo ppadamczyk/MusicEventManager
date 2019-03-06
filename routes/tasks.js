@@ -5,6 +5,13 @@ var Event = require("../models/event");
 var middleware = require("../middleware/index");
 var User = require("../models/user");
 
+router.get("/users/:user_id/tasks", middleware.isLoggedIn, function(req, res) {
+    User.findById(req.params.user_id).deepPopulate("contracts.contract_id contracts.contract_id.tasks").exec(function(err, foundUser) {
+        if (err) console.log(err);
+        res.render("events/tasks/index", { user: foundUser });
+    });
+});
+
 router.delete("/events/:eventid/tasks/:id", middleware.isLoggedIn, function(req, res) {
     Task.findOneAndDelete(req.params.id, function(err) {
         if (err) console.log(err);
@@ -14,14 +21,22 @@ router.delete("/events/:eventid/tasks/:id", middleware.isLoggedIn, function(req,
             foundEvent.tasks.splice(position, 1);
             foundEvent.save();
         });
-        res.redirect("/events/" + req.params.eventid + "/manage");
+        res.redirect('back');
     });
 });
 
-router.get("/users/:user_id/tasks", middleware.isLoggedIn, function(req, res) {
-    User.findById(req.params.user_id).deepPopulate("contracts.contract_id contracts.contract_id.tasks").exec(function(err, foundUser) {
+router.get("/events/:eventid/tasks/:id", middleware.isLoggedIn, function(req, res) {
+    Task.findById(req.params.id, function(err, foundTask) {
         if (err) console.log(err);
-        res.render("events/tasks/index", { user: foundUser });
+        res.render("events/tasks/edit", { task: foundTask });
+    });
+});
+
+router.put("/events/:eventid/tasks/:id", middleware.isLoggedIn, function(req, res) {
+    Task.findOneAndUpdate(req.params.id, req.body.newly, function(err, updatedTask) {
+        if (err) console.log(err);
+        console.log(updatedTask);
+        res.redirect("/main");
     });
 });
 

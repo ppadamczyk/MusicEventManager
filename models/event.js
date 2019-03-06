@@ -2,19 +2,20 @@ var mongoose = require("mongoose");
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var EventSchema = new mongoose.Schema({
-    event_name : String,
+    event_name: String,
     description: String,
     picture: String,
     isFinished: Boolean,
-    author:{
-         id: {
-         type: mongoose.Schema.Types.ObjectId,
-         ref: "User"
-      },
-      username: String
+    event_date: Date,
+    author: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
     },
-    
-    contractors:[{
+
+    contractors: [{
         contractor_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
@@ -23,12 +24,10 @@ var EventSchema = new mongoose.Schema({
         isConfirmed: Boolean
     }],
 
-    tasks:[
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Task"
-        },
-    ]
+    tasks: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Task"
+    }, ]
 });
 
 

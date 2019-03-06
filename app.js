@@ -1,13 +1,13 @@
 var express = require("express"),
     app = express(),
-    bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose"),
-    User        = require("./models/user"),
-    Offer       = require("./models/offer"),
-    Task       = require("./models/task"),
-    passport    = require("passport"),
+    bodyParser = require("body-parser"),
+    mongoose = require("mongoose"),
+    User = require("./models/user"),
+    Offer = require("./models/offer"),
+    Task = require("./models/task"),
+    passport = require("passport"),
     LocalStrategy = require("passport-local"),
-    flash        = require("connect-flash"),
+    flash = require("connect-flash"),
     session = require("express-session"),
     methodOverride = require("method-override");
 
@@ -25,9 +25,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use(function(req, res, next){
-   res.locals.currentUser = req.user;
-   next();
+app.use(function(req, res, next) {
+    res.locals.currentUser = req.user;
+    next();
 });
 
 
@@ -41,7 +41,8 @@ var taskRoutes = require("./routes/tasks");
 
 
 mongoose.connect("mongodb://localhost/music_event_manager", { useNewUrlParser: true });
-app.use(bodyParser.urlencoded({extended: true}));
+mongoose.set('useFindAndModify', false);
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride('_method'));
@@ -52,6 +53,6 @@ app.use("/", eventRoutes);
 app.use("/", userRoutes);
 app.use("/", taskRoutes);
 
-app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("Server is up!");
+app.listen(process.env.PORT, process.env.IP, function() {
+    console.log("Server is up!");
 });
