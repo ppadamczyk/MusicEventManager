@@ -1,0 +1,8 @@
+<% include ../partials/header %>
+    <div class="container">
+        <form method="POST" action="/users/<%= user._id%>/picture/?_method=PUT">
+            <input type="text" name="picture_url" placeholder="picture url">
+            <button style="display:block"class="btn btn-primary">Update</button>
+        </form>
+    </div>
+<% include ../partials/footer %>

@@ -1,0 +1,8 @@
+<% include ../partials/header %>
+    <div class="container">
+        <form method="POST" action="/users/<%= user._id%>/status/?_method=PUT">
+            <textarea name="updateStatus" cols="100" rows="6"><%= user.desc %></textarea>
+            <button style="display:block"class="btn btn-primary">Update</button>
+        </form>
+    </div>
+<% include ../partials/footer %>

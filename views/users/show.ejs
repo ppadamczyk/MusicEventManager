@@ -1,6 +1,9 @@
 <% include ../partials/header %>
 <div class="container">
+    <img src="<%=user.picture%>"/>
     <h4><a><%=user.username%></a></h4>
+    <p><%= user.desc %></p><hr>
+    <h4>Collabolators reviews:</h4>
     <% user.reviews.forEach(function(review){ %>
         <h1> <%= review.title %></h1>
        <% }); %>
