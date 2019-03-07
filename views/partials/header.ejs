@@ -4,6 +4,7 @@
 	<title>Music Event Manager</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="/stylesheets/main.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<script
 		src="https://code.jquery.com/jquery-3.3.1.min.js"
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -23,6 +24,7 @@
 				      <a class="nav-item nav-link" href="/login">Login</a>
 				      <a class="nav-item nav-link" href="/register">Sign up</a>
 			    <% } else { %>
+			    	  <a class="nav-item nav-link" href="/users/<%=currentUser._id%>/inbox" ><i><i class="fas fa-inbox"></i></i></a>
 				      <a class="nav-item nav-link" href="/users/<%=currentUser._id%>" >My profile</a>
 				      <a class="nav-item nav-link" href="/logout">Logout</a>
 				      <% if(currentUser.roles.artist || currentUser.roles.tech || currentUser.roles.place_owner || currentUser.roles.gear_owner){ %>

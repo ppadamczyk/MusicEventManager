@@ -1,6 +1,27 @@
-<% include ../partials/header %>
+
+
+<% include ../partials/header %> 
+    <div class="container mt-3" style="text-align:center">
     <h1><%= user.username %> reviews:</h1>
-    <% user.reviews.forEach(function(review){ %>
-        <h1> <%= review.title %></h1>
-    <% }); %>
-<% include ../partials/footer %>
+      <div class="row">
+          <% user.reviews.forEach(function(review){ %>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card mt-4" style="width: 100%; height: auto; text-align:center ">
+                       <div class="card-body">
+                           <div class="card-title">
+                           <h1> <%= review.title %></h1>
+                           </div>
+                           <div>
+                               <h3><%= review.grade%>/10</h3>
+                           </div>
+                       </div>
+                       <p>
+                           <%= review.text %>
+                       </p>
+                       <h4>Review by: <%=review.author.username%></h4>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+<% include ../partials/footer %> 

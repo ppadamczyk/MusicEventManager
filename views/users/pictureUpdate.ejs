@@ -1,8 +1,10 @@
 <% include ../partials/header %>
-    <div class="container">
-        <form method="POST" action="/users/<%= user._id%>/picture/?_method=PUT">
+    <div class="container" style="text-align:center">
+        <div class="mt-5"><form method="POST" action="/users/<%= user._id%>/picture/?_method=PUT">
+            <h1>Paste your new picture url:</h1>
             <input type="text" name="picture_url" placeholder="picture url">
-            <button style="display:block"class="btn btn-primary">Update</button>
+            <button class="btn btn-primary">Update</button>
         </form>
+        </div>
     </div>
 <% include ../partials/footer %>

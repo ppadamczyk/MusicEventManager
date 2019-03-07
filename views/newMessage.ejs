@@ -1,0 +1,19 @@
+<% include ./partials/header %> 
+<div class="container">
+    <div class="row">
+        <div style="width: 30%; margin: 25px auto;">
+            <h1 style="text-align: center;">A message to <%= user.username %></h1>
+            <form action="/users/<%= user._id %>/message" method="post">
+                <div class="form-group">
+                    <input type="text" class="login-form" name="message[topic]" placeholder="topic">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="login-form" name="message[text]" placeholder="text">
+                </div>
+                <button class="btn btn-lg btn-success btn-block">Send!</button>
+            </form>
+            <a href="/main">Go back</a>
+        </div>
+    </div>
+</div>
+<% include ./partials/footer %> 

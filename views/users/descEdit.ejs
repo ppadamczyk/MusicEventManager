@@ -1,8 +1,11 @@
 <% include ../partials/header %>
-    <div class="container">
+    <div class="container mt-5" style="text-align:center">
+        <h1>Update your status:</h1>
         <form method="POST" action="/users/<%= user._id%>/status/?_method=PUT">
             <textarea name="updateStatus" cols="100" rows="6"><%= user.desc %></textarea>
-            <button style="display:block"class="btn btn-primary">Update</button>
+            <div style="text-align:center">
+                <button class="btn-lg btn-primary">Update</button>
+            </div>
         </form>
     </div>
 <% include ../partials/footer %>

@@ -33,7 +33,11 @@ var UserSchema = new mongoose.Schema({
     offers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Offer"
-    }, ]
+    }, ],
+    inbox: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Message"
+    }]
 });
 UserSchema.plugin(deepPopulate);
 UserSchema.plugin(passportLocalMongoose);

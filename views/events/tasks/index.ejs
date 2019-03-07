@@ -1,9 +1,9 @@
 <% include ../../partials/header %> 
     <div class="container">
-        <h1>These tasks belongs to you:</h1>
+        <h1 class="mt-4">These tasks belongs to you:</h1>
         <div class="row">
             <% user.contracts.forEach(function(contract){ %>
-            <div class="jumbotron jumbix col-4">
+            <div class="jumbotron jumbix col-3 m-4">
                 <% if(contract.isConfirmed){ %>
                 <h2><%= contract.contract_id.event_name %> tasks:</h2>
                 <% contract.contract_id.tasks.filter(function(task){return task.role===contract.role}).forEach(function(task){ %>
@@ -32,8 +32,6 @@
                         <a class="btn btn-primary" href="/events/<%=contract.contract_id._id%>/contractors/<%=user._id%>/confirm">Confirm new contract</a>
                         </div>
                     </div>
-                    
-                
                 <% } %>
             </div>
                 
