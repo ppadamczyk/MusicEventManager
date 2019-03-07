@@ -4,6 +4,7 @@
         <div class="row">
             <% user.contracts.forEach(function(contract){ %>
             <div class="jumbotron jumbix col-4">
+                <% if(contract.isConfirmed){ %>
                 <h2><%= contract.contract_id.event_name %> tasks:</h2>
                 <% contract.contract_id.tasks.filter(function(task){return task.role===contract.role}).forEach(function(task){ %>
                 <div class="card mt-2">
@@ -18,6 +19,22 @@
                 </div>
                 <% }); %>
                 <hr><a class="btn btn-primary" href="/events/<%=contract.contract_id._id%>/tasks/new">Add new task</a>
+                <% } else{ %>
+                    <h4>New posible contract</h2>
+                    <div class="card mt-2">
+                        <img class="card-img-top" src="<%= contract.contract_id.picture %>">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h2><%=contract.contract_id.event_name%></h2>
+                            </div>
+                        <p><%=contract.contract_id.event_date%></p>
+                        <p><%=contract.contract_id.description%></p>
+                        <a class="btn btn-primary" href="/events/<%=contract.contract_id._id%>/contractors/<%=user._id%>/confirm">Confirm new contract</a>
+                        </div>
+                    </div>
+                    
+                
+                <% } %>
             </div>
                 
           <% }); %>

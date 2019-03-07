@@ -6,7 +6,7 @@ var middleware = require("../middleware/index");
 var User = require("../models/user");
 
 router.get("/users/:user_id/tasks", middleware.isLoggedIn, function(req, res) {
-    User.findById(req.params.user_id).deepPopulate("contracts.contract_id contracts.contract_id.tasks").exec(function(err, foundUser) {
+    User.findById(req.params.user_id).deepPopulate("contracts.contract_id contracts.contract_id.tasks contract.contract_id.event_name contract.contract_id.event_date contract.contract_id.description contract.contract_id.picture").exec(function(err, foundUser) {
         if (err) console.log(err);
         res.render("events/tasks/index", { user: foundUser });
     });

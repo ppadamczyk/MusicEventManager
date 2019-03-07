@@ -93,7 +93,7 @@ router.get("/events/:id/manage", middleware.isLoggedIn, function(req, res) {
     });
 });
 
-router.get("/events/:id/done", function(req, res) {
+router.get("/events/:id/done", middleware.isLoggedIn, function(req, res) {
     Event.findById(req.params.id, function(err, foundEvent) {
         if (err) console.log(err);
         foundEvent.isFinished = true;
@@ -130,6 +130,35 @@ router.get("/events/:event_id/:offer_id", middleware.isLoggedIn, function(req, r
                 foundUser.contracts.push(newContract);
                 foundUser.save();
                 res.redirect("/events/" + req.params.event_id + "/marketplace");
+            });
+        });
+    });
+});
+
+router.get("/events/:event_id/contractors/:user_id/confirm", middleware.isLoggedIn, function(req, res) {
+    Event.findById(req.params.event_id, function(err, foundEvent) {
+        if (err) console.log(err);
+        console.log(foundEvent);
+        User.findById(req.params.user_id, function(err, foundUser) {
+            if (err) console.log(err);
+            console.log(foundUser);
+            foundEvent.contractors.filter(function(contractor) {
+                console.log(contractor);
+                return contractor.contractor_id.equals(foundUser._id);
+            }).forEach(function(contractor) {
+                contractor.isConfirmed = true;
+                foundEvent.save();
+                console.log(foundEvent);
+
+                foundUser.contracts.filter(function(contract) {
+                    console.log(contract);
+                    return contract.contract_id.equals(foundEvent._id);
+                }).forEach(function(contract) {
+                    contract.isConfirmed = true;
+                    foundUser.save();
+                    console.log(foundUser);
+                    res.redirect('back');
+                });
             });
         });
     });

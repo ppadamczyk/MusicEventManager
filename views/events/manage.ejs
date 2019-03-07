@@ -87,49 +87,77 @@
                         <div class="col-3">
                             <h2>Artists:</h2><hr>
                             <% event.contractors.filter(function(contractor){return contractor.role==="artist"}).forEach(function(contractor){ %>
-                            <div>
-                                <h4><%= contractor.contractor_id.username %></h4>
-                                <div class="btn-group btn-group-sm">
-                                    <a class="btn btn-primary" href="#">Contact user</a>
-                                    <a class="btn btn-danger" href="#">Report user</a>
-                                </div>
-                            </div>
+                                <% if(contractor.isConfirmed){ %>
+                                    <div>
+                                        <h4><%= contractor.contractor_id.username %></h4>
+                                        <div class="btn-group btn-group-sm">
+                                            <a class="btn btn-primary" href="#">Contact user</a>
+                                            <a class="btn btn-danger" href="#">Report user</a>
+                                        </div>
+                                    </div>
+                                <% } else { %>
+                                    <div>
+                                        <h4 style="color:red"><%= contractor.contractor_id.username %></h4>
+                                        <p>(not confirmed)</p>
+                                    </div>
+                                <% } %>
                             <% });%>
                         </div>
                         <div class="col-3">
                             <h2>Technicians:</h2><hr>
                             <% event.contractors.filter(function(contractor){return contractor.role==="tech"}).forEach(function(contractor){  %>
-                                <div>
-                                    <h4><%= contractor.contractor_id.username %></h4>
-                                    <div class="btn-group btn-group-sm">
-                                        <a class="btn btn-primary" href="#">Contact user</a>
-                                        <a class="btn btn-danger" href="#">Report user</a>
+                                <% if(contractor.isConfirmed){ %>
+                                    <div>
+                                        <h4><%= contractor.contractor_id.username %></h4>
+                                        <div class="btn-group btn-group-sm">
+                                            <a class="btn btn-primary" href="#">Contact user</a>
+                                            <a class="btn btn-danger" href="#">Report user</a>
+                                        </div>
                                     </div>
-                                </div>
+                                <% } else { %>
+                                    <div>
+                                        <h4 style="color:red"><%= contractor.contractor_id.username %></h4>
+                                        <p>(not confirmed)</p>
+                                    </div>
+                                <% } %>
                             <% });%>
                         </div>
                         <div class="col-3">
                             <h2>Gear owners:</h2><hr>
                             <% event.contractors.filter(function(contractor){return contractor.role==="gear_owner"}).forEach(function(contractor){  %>
-                                <div>
-                                    <h4><%= contractor.contractor_id.username %></h4>
-                                    <div class="btn-group btn-group-sm">
-                                        <a class="btn btn-primary" href="#">Contact user</a>
-                                        <a class="btn btn-danger" href="#">Report user</a>
+                               <% if(contractor.isConfirmed){ %>
+                                    <div>
+                                        <h4><%= contractor.contractor_id.username %></h4>
+                                        <div class="btn-group btn-group-sm">
+                                            <a class="btn btn-primary" href="#">Contact user</a>
+                                            <a class="btn btn-danger" href="#">Report user</a>
+                                        </div>
                                     </div>
-                                </div>
+                                <% } else { %>
+                                    <div>
+                                        <h4 style="color:red"><%= contractor.contractor_id.username %></h4>
+                                        <p>(not confirmed)</p>
+                                    </div>
+                                <% } %>
                             <% });%>
                         </div>
                         <div class="col-3">
                             <h2>Place owner:</h2><hr>
                                 <h4><% event.contractors.filter(function(contractor){return contractor.role==="place_owner"}).forEach(function(contractor){  %></h4>
-                                <div>
-                                    <h4><%= contractor.contractor_id.username %></h4>
-                                    <div class="btn-group btn-group-sm">
-                                        <a class="btn btn-primary" href="#">Contact user</a>
-                                        <a class="btn btn-danger" href="#">Report user</a>
+                                <% if(contractor.isConfirmed){ %>
+                                    <div>
+                                        <h4><%= contractor.contractor_id.username %></h4>
+                                        <div class="btn-group btn-group-sm">
+                                            <a class="btn btn-primary" href="#">Contact user</a>
+                                            <a class="btn btn-danger" href="#">Report user</a>
+                                        </div>
                                     </div>
-                                </div>
+                                <% } else { %>
+                                    <div>
+                                        <h4 style="color:red"><%= contractor.contractor_id.username %></h4>
+                                        <p>(not confirmed)</p>
+                                    </div>
+                                <% } %>
                             <% });%>
                         </div>
                     </div>
@@ -146,37 +174,45 @@
                     <div class="col-3">
                         <h2>Artists:</h2><hr>
                         <% event.contractors.filter(function(contractor){return contractor.role==="artist"}).forEach(function(contractor){ %>
+                            <% if(contractor.isConfirmed){ %>
                         <div>
                             <h4><%= contractor.contractor_id.username %></h4>
                             <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
                         </div>
+                            <% } %>
                         <% });%>
                     </div>
                     <div class="col-3">
                         <h2>Technicians:</h2><hr>
                         <% event.contractors.filter(function(contractor){return contractor.role==="tech"}).forEach(function(contractor){ %>
+                        <% if(contractor.isConfirmed){ %>
                             <div>
                                 <h4><%= contractor.contractor_id.username %></h4>
                                 <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
                             </div>
+                            <% } %>
                         <% });%>
                     </div>
                     <div class="col-3">
                         <h2>Gear owners:</h2><hr>
                         <% event.contractors.filter(function(contractor){return contractor.role==="gear_owner"}).forEach(function(contractor){ %>
+                            <% if(contractor.isConfirmed){ %>
                             <div>
                                 <h4><%= contractor.contractor_id.username %></h4>
                                 <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
                             </div>
+                            <% } %>
                         <% });%>
                     </div>
                     <div class="col-3">
                         <h2>Place owner:</h2><hr>
                         <% event.contractors.filter(function(contractor){return contractor.role==="place_owner"}).forEach(function(contractor){ %>
+                            <% if(contractor.isConfirmed){ %>
                             <div>
                                 <h4><%= contractor.contractor_id.username %></h4>
                                 <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
                             </div>
+                            <% } %>
                         <% });%>
                     </div>
                 </div>
