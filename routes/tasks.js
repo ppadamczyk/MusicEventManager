@@ -33,9 +33,11 @@ router.get("/events/:eventid/tasks/:id", middleware.isLoggedIn, function(req, re
 });
 
 router.put("/events/:eventid/tasks/:id", middleware.isLoggedIn, function(req, res) {
-    Task.findOneAndUpdate(req.params.id, req.body.newly, function(err, updatedTask) {
+    Task.findById(req.params.id, function(err, foundTask) {
+        foundTask.title = req.body.updated.title;
+        foundTask.text = req.body.updated.text;
+        foundTask.save();
         if (err) console.log(err);
-        console.log(updatedTask);
         res.redirect("/main");
     });
 });

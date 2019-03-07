@@ -3,7 +3,8 @@ var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
 var middleware = require("../middleware/index");
-var Review = require("../models/review")
+var Review = require("../models/review");
+var Report = require("../models/report");
 
 router.get("/users", middleware.isLoggedIn, function(req, res) {
     User.find({}, function(err, foundUsers) {
@@ -16,6 +17,27 @@ router.get("/users/:id", middleware.isLoggedIn, middleware.ownProfile, function(
     User.findById(req.params.id).populate("reviews").exec(function(err, foundUser) {
         if (err) console.log(err);
         res.render("users/show", { user: foundUser });
+    });
+});
+
+router.get("/users/:id/report", middleware.isLoggedIn, function(req, res) {
+    User.findById(req.params.id, function(err, foundUser) {
+        if (err) console.log(err);
+        res.render("users/report", { user: foundUser });
+    });
+});
+
+router.post("/users/:id/reports", middleware.isLoggedIn, function(req, res) {
+    let newReport = req.body.report;
+    newReport.author = {
+        id: req.user._id,
+        username: req.user.username
+    };
+    newReport.target = req.params.id;
+    Report.create(newReport, function(err, newlyCreated) {
+        newlyCreated.save();
+        res.render("main");
+        console.log(newlyCreated);
     });
 });
 

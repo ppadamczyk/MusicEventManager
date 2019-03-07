@@ -92,7 +92,7 @@
                                         <h4><%= contractor.contractor_id.username %></h4>
                                         <div class="btn-group btn-group-sm">
                                             <a class="btn btn-primary" href="#">Contact user</a>
-                                            <a class="btn btn-danger" href="#">Report user</a>
+                                            <a class="btn btn-danger" href="/users/<%=contractor.contractor_id._id%>/report">Report user</a>
                                         </div>
                                     </div>
                                 <% } else { %>
@@ -111,7 +111,7 @@
                                         <h4><%= contractor.contractor_id.username %></h4>
                                         <div class="btn-group btn-group-sm">
                                             <a class="btn btn-primary" href="#">Contact user</a>
-                                            <a class="btn btn-danger" href="#">Report user</a>
+                                            <a class="btn btn-danger" href="/users/<%=contractor.contractor_id._id%>/report">Report user</a>
                                         </div>
                                     </div>
                                 <% } else { %>
@@ -130,7 +130,7 @@
                                         <h4><%= contractor.contractor_id.username %></h4>
                                         <div class="btn-group btn-group-sm">
                                             <a class="btn btn-primary" href="#">Contact user</a>
-                                            <a class="btn btn-danger" href="#">Report user</a>
+                                            <a class="btn btn-danger" href="/users/<%=contractor.contractor_id._id%>/report">Report user</a>
                                         </div>
                                     </div>
                                 <% } else { %>
@@ -149,7 +149,7 @@
                                         <h4><%= contractor.contractor_id.username %></h4>
                                         <div class="btn-group btn-group-sm">
                                             <a class="btn btn-primary" href="#">Contact user</a>
-                                            <a class="btn btn-danger" href="#">Report user</a>
+                                            <a class="btn btn-danger" href="/users/<%=contractor.contractor_id._id%>/report">Report user</a>
                                         </div>
                                     </div>
                                 <% } else { %>
@@ -177,7 +177,7 @@
                             <% if(contractor.isConfirmed){ %>
                         <div>
                             <h4><%= contractor.contractor_id.username %></h4>
-                            <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
+                            <a class="btn btn-primary" href="/users/<%=contractor.contractor_id._id%>/reviews/new">Add review</a>
                         </div>
                             <% } %>
                         <% });%>
@@ -188,7 +188,7 @@
                         <% if(contractor.isConfirmed){ %>
                             <div>
                                 <h4><%= contractor.contractor_id.username %></h4>
-                                <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
+                                <a class="btn btn-primary" href="/users/<%=contractor.contractor_id._id%>/reviews/new">Add review</a>
                             </div>
                             <% } %>
                         <% });%>
@@ -199,7 +199,7 @@
                             <% if(contractor.isConfirmed){ %>
                             <div>
                                 <h4><%= contractor.contractor_id.username %></h4>
-                                <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
+                                <a class="btn btn-primary" href="/users/<%=contractor.contractor_id._id%>/reviews/new">Add review</a>
                             </div>
                             <% } %>
                         <% });%>
@@ -210,7 +210,7 @@
                             <% if(contractor.isConfirmed){ %>
                             <div>
                                 <h4><%= contractor.contractor_id.username %></h4>
-                                <a class="btn btn-primary" href="/users/<%=contractor._id%>/reviews/new">Add review</a>
+                                <a class="btn btn-primary" href="/users/<%=contractor.contractor_id._id%>/reviews/new">Add review</a>
                             </div>
                             <% } %>
                         <% });%>

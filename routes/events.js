@@ -87,7 +87,7 @@ router.post("/events/:id/tasks", middleware.isLoggedIn, function(req, res) {
 });
 
 router.get("/events/:id/manage", middleware.isLoggedIn, function(req, res) {
-    Event.findById(req.params.id).populate("contractors.contractor_id tasks").exec(function(err, foundEvent) {
+    Event.findById(req.params.id).populate("contractors.contractor_id tasks contractors._id").exec(function(err, foundEvent) {
         if (err) console.log(err);
         res.render("events/manage", { event: foundEvent });
     });
