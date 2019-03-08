@@ -1,12 +1,18 @@
 <% include ./partials/header %> 
-<div class="container">
+<div class="container" style="text-align:center">
     <h1>Inbox</h1>
     <div class="row">
         <div class="card mt-2">
             <% user.inbox.forEach(function(message){ %>
-            <h2> <%= message.topic %></h2>
-            <h4> <%= message.text %></h4>
+            <h2><a href="#"><%= message.topic %></a> </h2>
             <p>Written by <%= message.author.username %></p>
+            <div class="btn-group btn-group-sm">
+                <a class="btn btn-success" href="#">Answer</a>
+                <form method="POST" action="/<%=user._id%>/messages/<%=message._id%>/?_method=DELETE">
+                    <button class="btn btn-xs btn-danger">Delete</button>
+                </form>
+                
+            </div>
         <% }); %>
         </div>
         

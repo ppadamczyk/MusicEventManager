@@ -28,36 +28,6 @@ router.get("/users/:id", middleware.isLoggedIn, middleware.ownProfile, function(
     });
 });
 
-router.get("/users/:id/inbox", middleware.isLoggedIn, function(req, res) {
-    User.findById(req.params.id).populate("inbox").exec(function(err, foundUser) {
-        if (err) console.log(err);
-        res.render("inbox", { user: foundUser });
-    });
-});
-
-router.get("/users/:id/message/new", middleware.isLoggedIn, function(req, res) {
-    User.findById(req.params.id, function(err, foundUser) {
-        if (err) console.log(err);
-        res.render("newMessage", { user: foundUser });
-    });
-});
-
-router.post("/users/:id/message", middleware.isLoggedIn, function(req, res) {
-    let newMessage = req.body.message;
-    newMessage.author = {
-        id: req.user._id,
-        username: req.user.username
-    };
-    Message.create(newMessage, function(err, newlyCreated) {
-        newlyCreated.save();
-        User.findById(req.params.id, function(err, foundUser) {
-            foundUser.inbox.push(newlyCreated._id);
-            foundUser.save();
-            res.render("main");
-        });
-    });
-});
-
 router.get("/users/:id/report", middleware.isLoggedIn, function(req, res) {
     User.findById(req.params.id, function(err, foundUser) {
         if (err) console.log(err);

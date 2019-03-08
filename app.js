@@ -38,6 +38,7 @@ var marketplaceRoutes = require("./routes/marketplace");
 var eventRoutes = require("./routes/events");
 var userRoutes = require("./routes/users");
 var taskRoutes = require("./routes/tasks");
+var messageRoutes = require("./routes/messages");
 
 
 mongoose.connect("mongodb://localhost/music_event_manager", { useNewUrlParser: true });
@@ -52,6 +53,7 @@ app.use("/", marketplaceRoutes);
 app.use("/", eventRoutes);
 app.use("/", userRoutes);
 app.use("/", taskRoutes);
+app.use("/", messageRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("Server is up!");
