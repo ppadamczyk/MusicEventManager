@@ -2,11 +2,14 @@
 <div class="container">
     <h1>Inbox</h1>
     <div class="row">
-        <% user.inbox.forEach(function(message){ %>
+        <div class="card mt-2">
+            <% user.inbox.forEach(function(message){ %>
             <h2> <%= message.topic %></h2>
             <h4> <%= message.text %></h4>
             <p>Written by <%= message.author.username %></p>
         <% }); %>
+        </div>
+        
     </div>
 </div>
     

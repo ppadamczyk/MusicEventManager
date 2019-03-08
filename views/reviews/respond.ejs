@@ -1,0 +1,16 @@
+<% include ../partials/header %> 
+<div class="container">
+    <div class="row">
+        <div style="width: 30%; margin: 25px auto;">
+            <h1 style="text-align: center;">Answer <%= review.author.username %>'s review</h1>
+            <form action="/reviews/<%=review._id%>/answer" method="POST">
+                <div class="form-group">
+                    <input type="text" class="login-form" name="answer" placeholder="your answer" required>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block">Answer it!</button>
+            </form>
+            <a href="/main">Go back</a>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %> 

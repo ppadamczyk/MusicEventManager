@@ -19,6 +19,15 @@
                            <%= review.text %>
                        </p>
                        <h4>Review by: <%=review.author.username%></h4>
+
+                       <% if(review.answer){ %>
+                            <div class="card" style="color:purple">
+                                <h4> <%=review.answer%></h4>
+                                <p>Reviewed user's answer</p>
+                            </div>
+                        <% } else{ %>
+                            <a class="btn btn-xs btn-warning" href="/users/<%=user._id%>/reviews/<%=review._id%>/respond">Respond to review</a>
+                        <% } %>
                     </div>
                 </div>
             <% }); %>

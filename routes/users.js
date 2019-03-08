@@ -14,6 +14,13 @@ router.get("/users", middleware.isLoggedIn, function(req, res) {
     });
 });
 
+router.post("/reviews/:id/answer", middleware.isLoggedIn, function(req, res) {
+    Review.findByIdAndUpdate(req.params.id, { answer: req.body.answer }, function(err, updatedReview) {
+        if (err) console.log(err);
+        res.redirect("/main");
+    });
+});
+
 router.get("/users/:id", middleware.isLoggedIn, middleware.ownProfile, function(req, res) {
     User.findById(req.params.id).populate("reviews").exec(function(err, foundUser) {
         if (err) console.log(err);
@@ -157,5 +164,13 @@ router.put("/users/:id/picture", middleware.isLoggedIn, function(req, res) {
         res.render("users/ownProfile", { user: foundUser });
     });
 });
+
+router.get("/users/:user_id/reviews/:review_id/respond", middleware.isLoggedIn, function(req, res) {
+    Review.findById(req.params.review_id, function(err, foundReview) {
+        if (err) console.log(err);
+        res.render("reviews/respond", { review: foundReview });
+    });
+});
+
 
 module.exports = router;

@@ -1,22 +1,24 @@
 <% include ../partials/header %>
-<div class="container">
+<div class="container" style="text-align:center">
     <h1>YOUR PROFILE</h1>
     <img src="<%=user.picture%>"/>
-    <a href="/users/<%=user._id%>/picture/edit" class="btn btn-primary">Update my picture</a>
+    <div>
+        <a href="/users/<%=user._id%>/picture/edit" class="btn btn-primary mt-2">Update my picture</a>
+    </div>
+    
     <h4><a><%=user.username%></a></h4>
     <div class="jumbotron" style="text-align:center">
+        <h3>Your actual status:</h3>
         <p><%= user.desc %></p>
         <a href="/users/<%=user._id%>/status/edit" class="btn btn-primary">Update your status</a>
     </div>
-    
-    <% user.reviews.forEach(function(review){ %>
-        <h1> <%= review.title %></h1>
-         <% }); %>
-        <a href="/users/<%= user._id %>/roles" class="btn btn-primary">Update my roles</a>
-        <a href="/users/<%= user._id %>/reviews" class="btn btn-primary">Show my reviews</a>
-        <% if(user.roles.organizer){ %>
+         <div >
+            <a href="/users/<%= user._id %>/roles" class="btn btn-primary">Update my roles</a>
+            <a href="/users/<%= user._id %>/reviews" class="btn btn-primary">Show my reviews</a>
+            <% if(user.roles.organizer){ %>
             <a href="/users/<%= user._id %>/events" class="btn btn-primary">Show my events</a>
-        <% } %>            
-    <a href="/users"> Go back!</a>
+        <% } %> 
+         </div>
+                   
 </div>
 <% include ../partials/footer %>

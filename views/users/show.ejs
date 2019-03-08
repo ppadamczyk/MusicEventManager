@@ -1,12 +1,27 @@
 <% include ../partials/header %>
-<div class="container">
+<div class="container" style="text-align:center">
     <img src="<%=user.picture%>"/>
     <h4><a><%=user.username%></a></h4>
     <p><%= user.desc %></p><hr>
     <h4>Collabolators reviews:</h4>
-    <% user.reviews.forEach(function(review){ %>
-        <h1> <%= review.title %></h1>
-       <% }); %>
+    
+    <div class="row">
+        <% user.reviews.forEach(function(review){ %>
+            <div class="card col-4">
+                <h1> <%= review.title %></h1>
+                <h4> <%= review.grade %>/10</h4>
+                <p> <%= review.text %> </p>
+                <h4>Submitted by <%= review.author.username%></h4>
+                <% if(review.answer){ %>
+                    <div class="card">
+                        <h4> review.answer</h4>
+                        <p>Reviewed user answer</p>
+                    </div>
+                <% } %>
+            </div>
+        <% }); %>
+    </div>
+        
        <a href="/users/<%= user._id %>/reviews/new" class="btn btn-primary">Add review</a>
     <a href="/users"> Go back!</a>
 </div>

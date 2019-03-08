@@ -5,10 +5,10 @@
             <h1 style="text-align: center;">Write <%= user.username %>'s review</h1>
             <form action="/users/<%= user._id %>/reviews" method="post">
                 <div class="form-group">
-                    <input type="text" class="login-form" name="review[title]" placeholder="title">
+                    <input type="text" class="login-form" name="review[title]" placeholder="title" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="login-form" name="review[text]" placeholder="review">
+                    <input type="text" class="login-form" name="review[text]" placeholder="review" required>
                 </div>
                 <div class="form-group">
                     <select name="review[grade]">

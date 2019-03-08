@@ -4,6 +4,7 @@ var reviewSchema = mongoose.Schema({
     title: String,
     text: String,
     grade: Number,
+    answer: String,
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
