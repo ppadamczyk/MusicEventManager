@@ -5,6 +5,7 @@
         <div class="card mt-2">
             <% user.inbox.forEach(function(message){ %>
             <h2><a href="#"><%= message.topic %></a> </h2>
+            <p><%= message.text %></p>
             <p>Written by <%= message.author.username %></p>
             <div class="btn-group btn-group-sm">
                 <a class="btn btn-success" href="/messages/<%= message._id%>/answer/<%= message.author.id %>">Answer</a>
@@ -14,7 +15,6 @@
             </div>
         <% }); %>
         </div>
-        
     </div>
 </div>
     

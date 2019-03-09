@@ -47,7 +47,7 @@ router.get("/events/:id/marketplace", middleware.isLoggedIn, function(req, res) 
 
 router.post('/events/get', function(req, res) {
     let id = req.body.id;
-    Offer.find({ type: id }, function(err, foundOffers) {
+    Offer.find({ role: id }, function(err, foundOffers) {
         if (err) {}
         var msg = {
             foundOffers: foundOffers
@@ -115,7 +115,7 @@ router.get("/events/:event_id/:offer_id", middleware.isLoggedIn, function(req, r
 
                 let newContractor = {
                     contractor_id: foundOffer.author.id,
-                    role: foundOffer.type,
+                    role: foundOffer.role,
                     isConfirmed: false
                 };
                 foundEvent.contractors.push(newContractor);
@@ -123,7 +123,7 @@ router.get("/events/:event_id/:offer_id", middleware.isLoggedIn, function(req, r
 
                 let newContract = {
                     contract_id: foundEvent._id,
-                    role: foundOffer.type,
+                    role: foundOffer.role,
                     isConfirmed: false
                 };
 

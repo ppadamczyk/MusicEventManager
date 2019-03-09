@@ -8,6 +8,10 @@ router.get("/", function(req, res) {
     res.render("index");
 });
 
+router.get("/noFrontendAlert", function(req, res) {
+    res.render("noFrontendAlert");
+});
+
 router.get("/main", middleware.isLoggedIn, function(req, res) {
     res.render("main");
 });

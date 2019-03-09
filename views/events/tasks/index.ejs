@@ -18,7 +18,11 @@
                     </div>
                 </div>
                 <% }); %>
-                <hr><a class="btn btn-primary" href="/events/<%=contract.contract_id._id%>/tasks/new">Add new task</a>
+                <hr>
+                <div class="btn-group btn-group-sm">
+                <a class="btn btn-primary" href="/events/<%=contract.contract_id._id%>/tasks/new">Add new task</a>
+                <a class="btn btn-success" href="/users/<%=contract.contract_id.author.id%>/message/new">Contact organizer</a>
+                </div>
                 <% } else{ %>
                     <h4>New posible contract</h2>
                     <div class="card mt-2">

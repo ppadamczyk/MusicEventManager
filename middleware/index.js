@@ -27,5 +27,4 @@ middlewareObj.isOwnProfile = function(req, res, next) {
     }
 };
 
-
 module.exports = middlewareObj;
