@@ -10,22 +10,22 @@
                 <!--TYPE DECLARATION-->
                 <% if(currentUser.roles.artist===true){ %>
                 <div class="form-group">
-                    <input type="radio" name="type" value="artist">Artist
+                    <input type="radio" name="role" value="artist">Artist
                 </div>
                 <% } %>
                 <% if(currentUser.roles.tech===true){ %>
                 <div class="form-group">
-                    <input type="radio" name="type" value="tech">Tech
+                    <input type="radio" name="role" value="tech">Tech
                 </div>
                 <% } %>
                 <% if(currentUser.roles.place_owner===true){ %>
                 <div class="form-group">
-                    <input type="radio" name="type" value="place_owner">Place rental
+                    <input type="radio" name="role" value="place_owner">Place rental
                 </div>
                 <% } %>
                 <% if(currentUser.roles.gear_owner===true){ %>
                 <div class="form-group">
-                    <input type="radio" name="type" value="gear_owner">Gear Rental
+                    <input type="radio" name="role" value="gear_owner">Gear Rental
                 </div>
                 <% } %>
                 <div class="form-group">

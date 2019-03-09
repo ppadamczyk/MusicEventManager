@@ -21,7 +21,7 @@ router.post("/marketplace", middleware.isLoggedIn, function(req, res) {
     User.findById(req.user._id, function(err, foundUser) {
         if (err) console.log(err);
         let offer_name = req.body.offer_name;
-        let type = req.body.type;
+        let role = req.body.role;
         let picture = req.body.picture;
         if (picture === "") {
             picture = "https://www.thenewforestinn.co.uk/wp-content/uploads/2018/05/special-offer.jpg";
@@ -32,7 +32,7 @@ router.post("/marketplace", middleware.isLoggedIn, function(req, res) {
             id: req.user._id,
             username: req.user.username
         };
-        let newOffer = { offer_name: offer_name, type: type, picture: picture, description: description, price: price, author: author };
+        let newOffer = { offer_name: offer_name, role: role, picture: picture, description: description, price: price, author: author };
         Offer.create(newOffer, function(err, newlyCreated) {
             newlyCreated.save();
             foundUser.offers.push(newlyCreated);
@@ -58,7 +58,13 @@ router.get("/marketplace/:id/edit", function(req, res) {
 });
 
 router.put("/marketplace/:id", function(req, res) {
-    Offer.findOneAndUpdate(req.params.id, req.body.offer, function(err, updatedOffer) {
+    let updatedOffer = req.body.offer;
+    Offer.findById(req.params.id, function(err, foundOffer) {
+        foundOffer.offer_name = updatedOffer.offer_name;
+        foundOffer.description = updatedOffer.description;
+        foundOffer.price = updatedOffer.price;
+        foundOffer.picture = updatedOffer.picture;
+        foundOffer.save();
         if (err) console.log(err);
         res.redirect("/marketplace/" + req.params.id);
     });

@@ -12,10 +12,12 @@
                         <em>Submitted By <%= offer.author.username %></em>
                     </p>
                     <% if(currentUser && offer.author.id.equals(currentUser._id)){ %>
-                        <a class="btn btn-xs btn-warning" href="/marketplace/<%= offer._id %>/?_method=DELETE">Edit</a>
+                    <div class="btn-group btn-group-sm">
+                        <a class="btn btn-xs btn-warning" href="/marketplace/<%= offer._id %>/edit">Edit</a>
                         <form id="delete-form" action="/marketplace/<%= offer._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
                         </form>
+                    </div>
                     <% }%>
                     </div>
                 </div>

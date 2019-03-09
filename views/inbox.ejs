@@ -7,11 +7,10 @@
             <h2><a href="#"><%= message.topic %></a> </h2>
             <p>Written by <%= message.author.username %></p>
             <div class="btn-group btn-group-sm">
-                <a class="btn btn-success" href="#">Answer</a>
+                <a class="btn btn-success" href="/messages/<%= message._id%>/answer/<%= message.author.id %>">Answer</a>
                 <form method="POST" action="/<%=user._id%>/messages/<%=message._id%>/?_method=DELETE">
                     <button class="btn btn-xs btn-danger">Delete</button>
                 </form>
-                
             </div>
         <% }); %>
         </div>

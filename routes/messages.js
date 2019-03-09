@@ -47,4 +47,10 @@ router.delete("/:user_id/messages/:msg_id", middleware.isLoggedIn, function(req,
     });
 });
 
+router.get("/messages/:msg_id/answer/:usr_id", middleware.isLoggedIn, function(req, res) {
+    User.findById(req.params.usr_id, function(err, foundUser) {
+        res.render("messages/new", { user: foundUser });
+    });
+});
+
 module.exports = router;
