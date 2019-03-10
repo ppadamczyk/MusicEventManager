@@ -12,6 +12,13 @@ router.get("/users/:user_id/tasks", middleware.isLoggedIn, function(req, res) {
     });
 });
 
+router.get("/events/:id/tasks/new", middleware.isLoggedIn, function(req, res) {
+    Event.findById(req.params.id, function(err, foundEvent) {
+        if (err) console.log(err);
+        res.render("events/tasks/new", { event: foundEvent });
+    });
+});
+
 router.delete("/events/:eventid/tasks/:id", middleware.isLoggedIn, function(req, res) {
     Task.findOneAndDelete(req.params.id, function(err) {
         if (err) console.log(err);
@@ -38,7 +45,7 @@ router.put("/events/:eventid/tasks/:id", middleware.isLoggedIn, function(req, re
         foundTask.text = req.body.updated.text;
         foundTask.save();
         if (err) console.log(err);
-        res.redirect("/main");
+        res.redirect("/events/:eventid/manage");
     });
 });
 

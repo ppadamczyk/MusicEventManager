@@ -82,7 +82,7 @@ router.get("/users/:id/roles", middleware.isLoggedIn, middleware.isOwnProfile, f
 
 router.put("/users/:id/roles", middleware.isLoggedIn, function(req, res) {
     User.findByIdAndUpdate(req.params.id, { roles: req.body.roles }, function(err, updatedUser) {
-        res.redirect("/main");
+        res.redirect("/users/" + req.params.id);
     });
 });
 

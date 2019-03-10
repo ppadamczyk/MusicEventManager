@@ -63,13 +63,6 @@ router.get("/events/:eventid", middleware.isLoggedIn, function(req, res) {
     });
 });
 
-router.get("/events/:id/tasks/new", middleware.isLoggedIn, function(req, res) {
-    Event.findById(req.params.id, function(err, foundEvent) {
-        if (err) console.log(err);
-        res.render("events/tasks/new", { event: foundEvent });
-    });
-});
-
 router.post("/events/:id/tasks", middleware.isLoggedIn, function(req, res) {
     let newTask = req.body.task;
     newTask.author = req.user._id;
