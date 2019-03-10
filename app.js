@@ -41,7 +41,7 @@ var taskRoutes = require("./routes/tasks");
 var messageRoutes = require("./routes/messages");
 
 
-mongoose.connect("mongodb://localhost/music_event_manager", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://ppadamczyk:JebacBoty123!@cluster0-xvvmb.mongodb.net/test?retryWrites=true", { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
