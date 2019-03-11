@@ -1,13 +1,13 @@
 <% include ./partials/header %> 
 
-<div class="container">
+<div class="container" style="text-align:center">
     <div class="row">
         
         <!--DISPLAY DEPEND ON USER ROLES-->
         <!--1) Organizer & some other role-->
         
         <% if(currentUser.roles.organizer === true && (currentUser.roles.artist === true || currentUser.roles.tech === true || currentUser.roles.place_owner === true || currentUser.roles.gear_owner === true)){ %>
-        <div class="col-4">
+        <div class="col-xs-12 col-lg-4">
             <div class="jumbotron">
                 <h1 class="display-4">Search for offers</h1>
                 <p class="lead">Check what other people are able to offer.</p>
@@ -16,7 +16,7 @@
                 <a class="btn btn-primary btn-lg" href="/marketplace" role="button">View all offers</a>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-xs-12 col-lg-4">
             <div class="jumbotron">
                 <h1 class="display-4">Create your own offer</h1>
                 <p class="lead">Offer your own abilities or skills helping other people and earnig money.</p>
@@ -25,7 +25,7 @@
                 <a class="btn btn-primary btn-lg" href="/marketplace/new" role="button">Create your offer</a>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-xs-12 col-lg-4">
             <div class="jumbotron">
                 <h1 class="display-4">Organize your own event!</h1>
                 <p class="lead">Pick the best offers from the community marketplace to organize your own unique event.</p>
@@ -39,7 +39,7 @@
         <!-- 2) Only organizer -->
         
         <% if(currentUser.roles.organizer === true && currentUser.roles.artist != true && currentUser.roles.tech != true && currentUser.roles.place_owner != true && currentUser.roles.gear_owner != true){ %>
-        <div class="col-6">
+        <div class="col-xs-12 col-md-6">
             <div class="jumbotron">
                 <h1 class="display-4">Browse all offers</h1>
                 <p class="lead">Check what other people are able to offer.</p>
@@ -48,7 +48,7 @@
                 <a class="btn btn-primary btn-lg" href="/marketplace" role="button">View all offers</a>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-xs-12 col-md-6">
             <div class="jumbotron">
                 <h1 class="display-4">Organize your own event!</h1>
                 <p class="lead">Pick the best offers from the community marketplace to organize your own unique event.</p>
@@ -62,7 +62,7 @@
         <!-- 3) Any role but not organizer -->
         
         <% if(currentUser.roles.organizer != true) { %>
-        <div class="col-6">
+        <div class="col-xs-12 col-md-6">
             <div class="jumbotron">
                 <h1 class="display-4">Search for offers</h1>
                 <p class="lead">Check what other people are able to offer.</p>
@@ -71,7 +71,7 @@
                 <a class="btn btn-primary btn-lg" href="/marketplace" role="button">View all offers</a>
             </div>
        </div>
-       <div class="col-6">
+       <div class="col-xs-12 col-md-6">
             <div class="jumbotron">
                 <h1 class="display-4">Create your own offer</h1>
                 <p class="lead">Offer your own abilities or skills helping other people and earnig money.</p>

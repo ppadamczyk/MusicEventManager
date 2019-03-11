@@ -22,7 +22,7 @@ router.post("/events", middleware.isLoggedIn, function(req, res) {
         newEvent.author = author;
         newEvent.isFinished = false;
         if (newEvent.picture === "") {
-            newEvent.picture = "https://www.leedsandyorkpft.nhs.uk/news/wp-content/uploads/sites/4/2017/03/events-icon-680x680.jpg";
+            newEvent.picture = "https://imgbbb.com/images/2019/02/20/1.jpg)";
         }
         Event.create(newEvent, function(err, newlyCreated) {
             newlyCreated.save();
