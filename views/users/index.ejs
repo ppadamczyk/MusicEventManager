@@ -2,8 +2,9 @@
     <div class="container">
       <div class="row">
           <% users.forEach(function(user){ %>
-                <div class="col-md-3 col-sm-6 p-1">
+                <div class="col-md-3 col-sm-6 p-1" style="text-align:center">
                     <div class="card m-5" style="width: 18rem; height: auto">
+                        <img class="img-card-top" src="<%=user.picture%>"/>
                        <div class="card-body">
                            <div class="card-title">
                            <%= user.username %>

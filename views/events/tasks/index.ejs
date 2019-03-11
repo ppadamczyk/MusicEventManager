@@ -2,6 +2,9 @@
     <div class="container">
         <h1 class="mt-4">These tasks belongs to you:</h1>
         <div class="row">
+            <% if(user.contracts.length == 0){%>
+                <h3 style="text-align:center">You don't have any tasks, make sure you put your offer on the marketplace and wait until some pick you as his contractor!</h3>
+            <% } %>
             <% user.contracts.forEach(function(contract){ %>
             <div class="jumbotron jumbix col-3 m-4">
                 <% if(contract.isConfirmed){ %>

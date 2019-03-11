@@ -3,15 +3,11 @@ var express = require("express"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
     User = require("./models/user"),
-    Offer = require("./models/offer"),
-    Task = require("./models/task"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
     flash = require("connect-flash"),
     session = require("express-session"),
     methodOverride = require("method-override");
-
-
 
 app.use(require("express-session")({
     secret: "I love my university",
@@ -30,8 +26,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-
-
 //req routes
 var indexRoutes = require("./routes/index");
 var marketplaceRoutes = require("./routes/marketplace");
@@ -39,7 +33,6 @@ var eventRoutes = require("./routes/events");
 var userRoutes = require("./routes/users");
 var taskRoutes = require("./routes/tasks");
 var messageRoutes = require("./routes/messages");
-
 
 mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);

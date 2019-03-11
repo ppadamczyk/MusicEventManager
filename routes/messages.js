@@ -42,7 +42,7 @@ router.delete("/:user_id/messages/:msg_id", middleware.isLoggedIn, function(req,
             foundUser.save();
             foundMessage.remove(err);
             foundMessage.save();
-            res.redirect("/main");
+            res.redirect("/users/" + req.params.user_id + "/inbox");
         });
     });
 });
