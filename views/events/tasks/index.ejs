@@ -34,7 +34,7 @@
                             <div class="card-title">
                                 <h2><%=contract.contract_id.event_name%></h2>
                             </div>
-                        <p><%=contract.contract_id.event_date%></p>
+                        <p><%=contract.contract_id.event_date.getDate() + '/' + (contract.contract_id.event_date.getMonth() + 1) + '/' +  contract.contract_id.event_date.getFullYear()%></p>
                         <p><%=contract.contract_id.description%></p>
                         <a class="btn btn-primary" href="/events/<%=contract.contract_id._id%>/contractors/<%=user._id%>/confirm">Confirm new contract</a>
                         </div>
